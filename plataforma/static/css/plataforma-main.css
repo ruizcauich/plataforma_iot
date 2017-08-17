@@ -1,0 +1,89 @@
+body{
+    
+    background-color: #fff;
+    
+}
+
+
+/* Componentes contenedores  */
+.jumbotron{
+    position: relative;
+    top:51px;
+    padding:0;
+    padding-bottom: 0px;
+}
+body > div.container{
+    position: relative;
+    top:90px;
+}
+
+section.body-content{
+    position: relative;
+    top: 20px;
+    padding: 30px;
+}
+
+
+
+/*  Estilos aplicables la barra de navegación  */
+/* Barra de navegación  */
+.navbar{
+    border-radius: 0px
+}
+.navbar-default{
+    background-color: #3bb22f;
+    border-color: rgba(64, 178, 47, 0.3);
+    border-top: 0px;
+}
+.navbar-default .navbar-nav > li > a{
+    color: #fff;
+}
+.navbar-default .navbar-nav > li > a:hover{
+    color: #fff;
+    background-color: #1c4c6b;
+}
+
+.navbar-default .navbar-brand{
+    color:#fff;
+}
+.navbar-default .navbar-brand:hover{
+    color:#fff;
+}
+
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: 0px;
+}
+
+
+
+
+a.carousel-caption{
+    left: 10%;
+    right: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    top:70%;
+    height: auto;
+    bottom: auto;
+                    
+}
+
+@media only screen and (max-width: 768px){
+    a.carousel-caption{
+        left: 0;
+        right: auto;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        top:auto;
+        height: auto;
+        bottom: 2px;
+        font-size: 12px;
+        width: 100%;
+                        
+    }
+}

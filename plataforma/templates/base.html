@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title%}Inicio-IoT {% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/plataforma-main.css">
+    <link rel="stylesheet" href="../static/css/colores.css">
+    {% block template_components %}
+    {% endblock %}
+    
+</head>
+<body>
+    <header>
+        <nav class=" navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <!--Inicio navbar header  -->
+                <div class="navbar-header">
+                    <!--Botón de collapse para disp moviles  -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-1" aria-expanded="false">
+                        <span class="sr-only">Acultar-Mostrar navegación</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{% url 'inicio'%}" class="navbar-brand">Plataforma IoT</a>
+                    <!--Fin navbar-header  -->
+                </div>
+
+                <!--Colleccion links de nav  -->
+                <div class="collapse navbar-collapse" id="navbar-1">
+                    <!--Inicia lista de menú  -->
+                    <ul class="nav navbar-nav">
+                        <li class="{% block active_about %}{% endblock %}"><a href="{% url 'about' %}">Acerca De</a></li>
+                        <li class="{% block active_contact %}{% endblock %}"><a href="{% url 'contacto' %}"></span>Contacto</a></li>
+                    </ul>
+
+                    <!--Formulario de búsqueda  -->
+                     <from class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input name='publicacion' type="text" class="form-control" placeholder="Buscar">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+
+                    </from>
+
+                    <!--Links derechos  -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+                    </ul>
+
+                    <!--Fin Colleccion links de nav  -->
+                </div>
+                <!--Fin container-fluid  -->
+            </div>
+        </nav>
+    </header>
+
+
+{% block body %}
+
+{% endblock %}
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>
