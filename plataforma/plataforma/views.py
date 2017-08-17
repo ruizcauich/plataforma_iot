@@ -1,13 +1,13 @@
-from django.shorcuts import render
+from django.shortcuts import render
 
 
-def inicio(request):
-    contexto = { }
+def index(request):
+    context = { }
 
-    return render(request,'inicio.html',contexto)
+    return render(request,'inicio.html',context)
 
-def acerca_de(request):
+def about(request):
 
-    contexto = { }
+    context = { }
 
-    return render(request, 'acerca_de.html',contexto)
+    return render(request, 'acerca_de.html',context)

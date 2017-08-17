@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title%}Inicio-IoT {% endblock %}</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/plataforma-main.css">
-    <link rel="stylesheet" href="../static/css/colores.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plataforma-main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/colores.css' %}">
     {% block template_components %}
     {% endblock %}
     
@@ -34,7 +35,7 @@
                     <!--Inicia lista de menú  -->
                     <ul class="nav navbar-nav">
                         <li class="{% block active_about %}{% endblock %}"><a href="{% url 'about' %}">Acerca De</a></li>
-                        <li class="{% block active_contact %}{% endblock %}"><a href="{% url 'contacto' %}"></span>Contacto</a></li>
+                        <li class="{% block active_contact %}{% endblock %}"><a href=""></span>Contacto</a></li>
                     </ul>
 
                     <!--Formulario de búsqueda  -->
@@ -65,7 +66,7 @@
 
 {% endblock %}
 
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

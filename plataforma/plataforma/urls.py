@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.inicio,name='inicio'),
-    url(r'^about/$', views.acerca_de, name='acerca_de'),
+    url(r'^$', views.index,name='index'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^dashboard/', include('dashboard.urls')),
 ]
