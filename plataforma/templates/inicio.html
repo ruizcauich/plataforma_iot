@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title%} Inicio {% endblock %}
-    
+{% load staticfiles %}
 {% block body %} 
     <div class="jumbotron jombutron-slider">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -14,19 +14,19 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img class="img-responsive" src="img/landing/iot_slide1.jpeg" alt="...">
+                    <img class="img-responsive" src="{% static 'img/landing/iot_slide1.jpeg' %}" alt="...">
                     <div class="carousel-caption">
                         ...
                     </div>
                 </div>
                 <div class="item">
-                    <img class="img-responsive" src="img/landing/iot_slide2.jpeg" alt="...">
+                    <img class="img-responsive" src="{% static 'img/landing/iot_slide2.jpeg' %}" alt="...">
                     <div class="carousel-caption">
                         ...
                     </div>
                 </div>
                 <div class="item">
-                    <img class="img-responsive" src="img/landing/iot_slide3.jpeg" alt="...">
+                    <img class="img-responsive" src="{% static 'img/landing/iot_slide3.jpeg' %}" alt="...">
                     <div class="carousel-caption">
                         ...
                     </div>
@@ -48,7 +48,7 @@
             <style>
                 
             </style>
-            <a href="#" class="btn btn-success carousel-caption ">Crea tu proyecto IoT</a>
+            <a href="{% url 'dashboard:index' %}" class="btn btn-success carousel-caption ">Crea tu proyecto IoT</a>
         </div>
     </div>
 
