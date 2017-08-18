@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Configuraciones para el uso del email en django
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pedroesparzaaa@gmail.com'
+EMAIL_HOST_PASSWORD = 'pedritoesparzarules'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Application definition
 
