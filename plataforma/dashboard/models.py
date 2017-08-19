@@ -5,6 +5,9 @@ class Proyecto(models.Model):
     nombre_de_proyecto = models.CharField( max_length = 80)
     descripcion = models.TextField()
 
+    def __str__(self):
+        return self.nombre_de_proyecto
+
 
 class Dispositivo(models.Model):
     nombre_de_dispositivo = models.CharField(max_length = 80)
@@ -16,6 +19,9 @@ class Dispositivo(models.Model):
     fecha_creacion = models.DateTimeField( auto_now_add=True )
     # apikey no está implemetado por el momento
     # apikey
+
+    def __str__(self):
+        return self.nombre_de_dispositivo
 
 
 class Sensor(models.Model):
