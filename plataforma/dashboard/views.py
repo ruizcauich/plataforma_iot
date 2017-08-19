@@ -26,7 +26,7 @@ def formularioProyecto(request):
     return render(request,'dashboard/formProyecto.html',context)
 
 
-def formularioProyecto(request):
+def formularioDispositivo(request):
 
     form = formDispositivo(request.POST or None)
 
