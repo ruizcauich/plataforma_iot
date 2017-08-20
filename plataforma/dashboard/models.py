@@ -19,6 +19,7 @@ class Dispositivo(models.Model):
     fecha_creacion = models.DateTimeField( auto_now_add=True )
     # apikey no está implemetado por el momento
     # apikey
+    proyecto = models.ForeignKey(Proyecto, default = 1)
 
     def __str__(self):
         return self.nombre_de_dispositivo
@@ -29,11 +30,25 @@ class Sensor(models.Model):
     tipo = models.CharField(max_length = 40)
     fecha_creacion = models.DateTimeField( auto_now_add=True )
     esta_habilitado = models.BooleanField(default = True)
+    dispositivo = models.ForeignKey(Dispositivo, default = 1)
+
+    def __str__(self):
+        return self.nombre_de_sensor
+
 
 class Campo( models.Model):
     nombre_de_campo = models.CharField(max_length=30)
     tipo_de_valor = models.CharField(max_length=40)
+    sensor = models.ForeignKey(Sensor, default = 1)
+
+    def __str__(self):
+        return self.nombre_de_campo
+
 
 class Valor(models.Model):
     valor = models.CharField(max_length=100)
     fecha_hora_lectura = models.DateTimeField(auto_now_add=True)
+    campo = models.ForeignKey(Campo, default = 1)
+
+    def __str__(self):
+        return self.valor
