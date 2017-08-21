@@ -24,6 +24,11 @@ section.body-content{
 }
 
 
+/* TITULOS */
+.section-title{
+    border-bottom: 0.7px #b4b3b380 solid
+}
+
 
 /*  Estilos aplicables la barra de navegación  */
 /* Barra de navegación  */

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block title%} Panel de administración:
     {% block section_title %}
     {% endblock %}
 {% endblock %}
 {% block template_components %} 
-    <link rel="stylesheet" href="../static/css/plataforma.css">
+    <link rel="stylesheet" href="{% static '/css/plataforma.css' %}">
 
 {% endblock %}
 
@@ -19,11 +19,11 @@
         </label>
         <nav class=" bg-black toolbar">
             <div class="list-group text-center">
-                <a href="" class=" list-group-item" >
+                <a href="{% url 'dashboard:index' %}" class=" list-group-item" >
                     <span class="glyphicon glyphicon-home"></span>
                     Principal
                 </a>
-                <a href="" class=" list-group-item">
+                <a href="{% url 'dashboard:proyectos'%}" class=" list-group-item">
                     <span class="glyphicon glyphicon-folder-open"></span>
                     Proyectos
                 </a>

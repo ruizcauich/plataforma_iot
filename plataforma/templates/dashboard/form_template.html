@@ -1,0 +1,10 @@
+
+{% for field in form  %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label}}" class=" col-sm-3 control-label text-right">{{field.label}}</field-label></label>
+        <div class="col-sm-9">
+            {{field}}
+        </div>
+    </div>
+{% endfor %}
+    

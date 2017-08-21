@@ -14,16 +14,18 @@ def index(request):
 def formularioProyecto(request):
 
     form = formProyecto(request.POST or None)
-
     if form.is_valid():
         proyecto = form.save()
         form = formProyecto()
 
     
-    
-    context = {'form': form}
+    proyectos = Proyecto.objects.all()
+    context = {
+        'form': form,
+        'proyectos': proyectos
+    }
 
-    return render(request,'dashboard/formProyecto.html',context)
+    return render(request,'dashboard/proyectos.html',context)
 
 
 def formularioDispositivo(request):
