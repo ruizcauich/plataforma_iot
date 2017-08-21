@@ -7,5 +7,7 @@ urlpatterns = [
     #dashboard/
     url(r'^$', views.index ,name='index'),
     #dashboard/proyecto
-    url(r'^proyectos/$', views.formularioProyecto, name = 'proyectos')    
+    url(r'^proyectos/$', views.formularioProyecto, name = 'proyectos'),    
+    #dashboard/dispoitivos
+    url(r'^dispositivos/$', views.formularioDispositivo, name = 'dispositivos'),
 ]

@@ -5,12 +5,13 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 0001_initial.py	../dashboard/migrations/0001_initial.py	1;"	kind:file	line:1
+0002_auto_20170819_2249.py	../dashboard/migrations/0002_auto_20170819_2249.py	1;"	kind:file	line:1
 ALLOWED_HOSTS	../plataforma/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
 AUTH_PASSWORD_VALIDATORS	../plataforma/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:96
 AppConfig	../dashboard/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
 BASE_DIR	../plataforma/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
 Campo	../dashboard/forms.py	/^from .models import Proyecto, Dispositivo, Sensor, Campo, Valor$/;"	kind:namespace	line:2
-Campo	../dashboard/models.py	/^class Campo( models.Model):$/;"	kind:class	line:33
+Campo	../dashboard/models.py	/^class Campo( models.Model):$/;"	kind:class	line:39
 ContactForm	../plataforma/forms.py	/^class ContactForm(forms.Form):$/;"	kind:class	line:3
 ContactForm	../plataforma/views.py	/^from .forms import ContactForm$/;"	kind:namespace	line:4
 DATABASES	../plataforma/settings.py	/^DATABASES = {$/;"	kind:variable	line:85
@@ -33,6 +34,7 @@ Meta	../dashboard/forms.py	/^    class Meta:$/;"	kind:class	line:27
 Meta	../dashboard/forms.py	/^    class Meta:$/;"	kind:class	line:39
 Meta	../dashboard/forms.py	/^    class Meta:$/;"	kind:class	line:5
 Migration	../dashboard/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../dashboard/migrations/0002_auto_20170819_2249.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
 Proyecto	../dashboard/admin.py	/^from .models import Proyecto, Dispositivo$/;"	kind:namespace	line:2
 Proyecto	../dashboard/forms.py	/^from .models import Proyecto, Dispositivo, Sensor, Campo, Valor$/;"	kind:namespace	line:2
 Proyecto	../dashboard/models.py	/^class Proyecto(models.Model):$/;"	kind:class	line:4
@@ -42,7 +44,7 @@ SECRET_KEY	../plataforma/settings.py	/^SECRET_KEY = 'kg_baa)1048a$ihnwoposq!6a2l
 STATICFILES_DIRS	../plataforma/settings.py	/^STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)/;"	kind:variable	line:132
 STATIC_URL	../plataforma/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:129
 Sensor	../dashboard/forms.py	/^from .models import Proyecto, Dispositivo, Sensor, Campo, Valor$/;"	kind:namespace	line:2
-Sensor	../dashboard/models.py	/^class Sensor(models.Model):$/;"	kind:class	line:27
+Sensor	../dashboard/models.py	/^class Sensor(models.Model):$/;"	kind:class	line:28
 TEMPLATES	../plataforma/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:63
 TIME_ZONE	../plataforma/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:117
 TestCase	../dashboard/tests.py	/^from django.test import TestCase$/;"	kind:namespace	line:1
@@ -50,12 +52,15 @@ USE_I18N	../plataforma/settings.py	/^USE_I18N = True$/;"	kind:variable	line:119
 USE_L10N	../plataforma/settings.py	/^USE_L10N = True$/;"	kind:variable	line:121
 USE_TZ	../plataforma/settings.py	/^USE_TZ = True$/;"	kind:variable	line:123
 Valor	../dashboard/forms.py	/^from .models import Proyecto, Dispositivo, Sensor, Campo, Valor$/;"	kind:namespace	line:2
-Valor	../dashboard/models.py	/^class Valor(models.Model):$/;"	kind:class	line:37
+Valor	../dashboard/models.py	/^class Valor(models.Model):$/;"	kind:class	line:48
 WSGI_APPLICATION	../plataforma/settings.py	/^WSGI_APPLICATION = 'plataforma.wsgi.application'$/;"	kind:variable	line:79
 __init__.py	../dashboard/__init__.py	1;"	kind:file	line:1
 __init__.py	../dashboard/migrations/__init__.py	1;"	kind:file	line:1
 __init__.py	../plataforma/__init__.py	1;"	kind:file	line:1
-__str__	../dashboard/models.py	/^    def __str__(self):$/;"	kind:member	line:23
+__str__	../dashboard/models.py	/^    def __str__(self):$/;"	kind:member	line:24
+__str__	../dashboard/models.py	/^    def __str__(self):$/;"	kind:member	line:35
+__str__	../dashboard/models.py	/^    def __str__(self):$/;"	kind:member	line:44
+__str__	../dashboard/models.py	/^    def __str__(self):$/;"	kind:member	line:53
 __str__	../dashboard/models.py	/^    def __str__(self):$/;"	kind:member	line:8
 about	../plataforma/views.py	/^def about(request):$/;"	kind:function	line:12
 admin	../dashboard/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
@@ -64,18 +69,28 @@ admin.py	../dashboard/admin.py	1;"	kind:file	line:1
 app_name	../dashboard/urls.py	/^app_name = 'dashboard'$/;"	kind:variable	line:4
 application	../plataforma/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
 apps.py	../dashboard/apps.py	1;"	kind:file	line:1
+campo	../dashboard/models.py	/^    campo = models.ForeignKey(Campo, default = 1)$/;"	kind:variable	line:51
 contact	../plataforma/views.py	/^def contact(request):$/;"	kind:function	line:20
+db	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
+deletion	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
 dependencies	../dashboard/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:12
+dependencies	../dashboard/migrations/0002_auto_20170819_2249.py	/^    dependencies = [$/;"	kind:variable	line:11
 descripcion	../dashboard/models.py	/^    descripcion = models.TextField()$/;"	kind:variable	line:14
 descripcion	../dashboard/models.py	/^    descripcion = models.TextField()$/;"	kind:variable	line:6
+dispositivo	../dashboard/models.py	/^    dispositivo = models.ForeignKey(Dispositivo, default = 1)$/;"	kind:variable	line:33
+django	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
 django	../manage.py	/^            import django$/;"	kind:namespace	line:14
 email	../plataforma/forms.py	/^    email = forms.EmailField()$/;"	kind:variable	line:7
 esta_habilitado	../dashboard/models.py	/^    esta_habilitado = models.BooleanField(default = True)$/;"	kind:variable	line:18
-esta_habilitado	../dashboard/models.py	/^    esta_habilitado = models.BooleanField(default = True)$/;"	kind:variable	line:31
+esta_habilitado	../dashboard/models.py	/^    esta_habilitado = models.BooleanField(default = True)$/;"	kind:variable	line:32
 execute_from_command_line	../manage.py	/^        from django.core.management import execute_from_command_line$/;"	kind:namespace	line:8
 fecha_creacion	../dashboard/models.py	/^    fecha_creacion = models.DateTimeField( auto_now_add=True )$/;"	kind:variable	line:19
-fecha_creacion	../dashboard/models.py	/^    fecha_creacion = models.DateTimeField( auto_now_add=True )$/;"	kind:variable	line:30
-fecha_hora_lectura	../dashboard/models.py	/^    fecha_hora_lectura = models.DateTimeField(auto_now_add=True)/;"	kind:variable	line:39
+fecha_creacion	../dashboard/models.py	/^    fecha_creacion = models.DateTimeField( auto_now_add=True )$/;"	kind:variable	line:31
+fecha_hora_lectura	../dashboard/models.py	/^    fecha_hora_lectura = models.DateTimeField(auto_now_add=True)$/;"	kind:variable	line:50
+field	../dashboard/migrations/0002_auto_20170819_2249.py	/^            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='dashboard.Campo'),$/;"	kind:variable	line:34
+field	../dashboard/migrations/0002_auto_20170819_2249.py	/^            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='dashboard.Dispositivo'),$/;"	kind:variable	line:29
+field	../dashboard/migrations/0002_auto_20170819_2249.py	/^            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='dashboard.Proyecto'),$/;"	kind:variable	line:24
+field	../dashboard/migrations/0002_auto_20170819_2249.py	/^            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='dashboard.Sensor'),$/;"	kind:variable	line:19
 fields	../dashboard/forms.py	/^        fields = '__all__'$/;"	kind:variable	line:17
 fields	../dashboard/forms.py	/^        fields = '__all__'$/;"	kind:variable	line:29
 fields	../dashboard/forms.py	/^        fields = '__all__'$/;"	kind:variable	line:41
@@ -97,7 +112,7 @@ forms	../dashboard/forms.py	/^from django import forms$/;"	kind:namespace	line:1
 forms	../plataforma/forms.py	/^from django import forms$/;"	kind:namespace	line:1
 forms.py	../dashboard/forms.py	1;"	kind:file	line:1
 forms.py	../plataforma/forms.py	1;"	kind:file	line:1
-formularioDispositivo	../dashboard/views.py	/^def formularioDispositivo(request):$/;"	kind:function	line:29
+formularioDispositivo	../dashboard/views.py	/^def formularioDispositivo(request):$/;"	kind:function	line:31
 formularioProyecto	../dashboard/views.py	/^def formularioProyecto(request):$/;"	kind:function	line:14
 get_wsgi_application	../plataforma/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:12
 include	../dashboard/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:1
@@ -116,12 +131,19 @@ longitud	../dashboard/models.py	/^    longitud = models.FloatField()$/;"	kind:va
 manage.py	../manage.py	1;"	kind:file	line:1
 message	../plataforma/forms.py	/^    message = forms.CharField(widget=forms.Textarea,max_length=None)$/;"	kind:variable	line:8
 migrations	../dashboard/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+migrations	../dashboard/migrations/0002_auto_20170819_2249.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
 model	../dashboard/forms.py	/^        model = Campo$/;"	kind:variable	line:40
 model	../dashboard/forms.py	/^        model = Dispositivo$/;"	kind:variable	line:16
 model	../dashboard/forms.py	/^        model = Proyecto$/;"	kind:variable	line:6
 model	../dashboard/forms.py	/^        model = Sensor$/;"	kind:variable	line:28
 model	../dashboard/forms.py	/^    model = Valor$/;"	kind:variable	line:50
+model_name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            model_name='campo',$/;"	kind:variable	line:17
+model_name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            model_name='dispositivo',$/;"	kind:variable	line:22
+model_name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            model_name='sensor',$/;"	kind:variable	line:27
+model_name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            model_name='valor',$/;"	kind:variable	line:32
 models	../dashboard/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	../dashboard/migrations/0002_auto_20170819_2249.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
 models	../dashboard/models.py	/^from django.db import models$/;"	kind:namespace	line:1
 models.py	../dashboard/models.py	1;"	kind:file	line:1
 name	../dashboard/apps.py	/^    name = 'dashboard'$/;"	kind:variable	line:5
@@ -130,32 +152,40 @@ name	../dashboard/migrations/0001_initial.py	/^            name='Dispositivo',$/
 name	../dashboard/migrations/0001_initial.py	/^            name='Proyecto',$/;"	kind:variable	line:38
 name	../dashboard/migrations/0001_initial.py	/^            name='Sensor',$/;"	kind:variable	line:46
 name	../dashboard/migrations/0001_initial.py	/^            name='Valor',$/;"	kind:variable	line:56
+name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            name='campo',$/;"	kind:variable	line:33
+name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            name='dispositivo',$/;"	kind:variable	line:28
+name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            name='proyecto',$/;"	kind:variable	line:23
+name	../dashboard/migrations/0002_auto_20170819_2249.py	/^            name='sensor',$/;"	kind:variable	line:18
 name	../plataforma/forms.py	/^    name = forms.CharField(required=True, max_length=200)$/;"	kind:variable	line:6
-nombre_de_campo	../dashboard/models.py	/^    nombre_de_campo = models.CharField(max_length=30)$/;"	kind:variable	line:34
+nombre_de_campo	../dashboard/models.py	/^    nombre_de_campo = models.CharField(max_length=30)$/;"	kind:variable	line:40
 nombre_de_dispositivo	../dashboard/models.py	/^    nombre_de_dispositivo = models.CharField(max_length = 80)$/;"	kind:variable	line:13
 nombre_de_proyecto	../dashboard/models.py	/^    nombre_de_proyecto = models.CharField( max_length = 80)$/;"	kind:variable	line:5
-nombre_de_sensor	../dashboard/models.py	/^    nombre_de_sensor = models.CharField(max_length=40)$/;"	kind:variable	line:28
+nombre_de_sensor	../dashboard/models.py	/^    nombre_de_sensor = models.CharField(max_length=40)$/;"	kind:variable	line:29
 operations	../dashboard/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../dashboard/migrations/0002_auto_20170819_2249.py	/^    operations = [$/;"	kind:variable	line:15
 os	../manage.py	/^import os$/;"	kind:namespace	line:2
 os	../plataforma/settings.py	/^import os$/;"	kind:namespace	line:13
 os	../plataforma/wsgi.py	/^import os$/;"	kind:namespace	line:10
+proyecto	../dashboard/models.py	/^    proyecto = models.ForeignKey(Proyecto, default = 1)$/;"	kind:variable	line:22
 render	../dashboard/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
 render	../plataforma/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
 send_mail	../plataforma/views.py	/^from django.core.mail import send_mail$/;"	kind:namespace	line:2
+sensor	../dashboard/models.py	/^    sensor = models.ForeignKey(Sensor, default = 1)$/;"	kind:variable	line:42
 settings.py	../plataforma/settings.py	1;"	kind:file	line:1
 sys	../manage.py	/^import sys$/;"	kind:namespace	line:3
 tests.py	../dashboard/tests.py	1;"	kind:file	line:1
-tipo	../dashboard/models.py	/^    tipo = models.CharField(max_length = 40)$/;"	kind:variable	line:29
+tipo	../dashboard/models.py	/^    tipo = models.CharField(max_length = 40)$/;"	kind:variable	line:30
 tipo	../dashboard/models.py	/^    tipo = models.CharField(max_length=40)$/;"	kind:variable	line:15
-tipo_de_valor	../dashboard/models.py	/^    tipo_de_valor = models.CharField(max_length=40)$/;"	kind:variable	line:35
+tipo_de_valor	../dashboard/models.py	/^    tipo_de_valor = models.CharField(max_length=40)$/;"	kind:variable	line:41
 unicode_literals	../dashboard/migrations/0001_initial.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+unicode_literals	../dashboard/migrations/0002_auto_20170819_2249.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
 url	../dashboard/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:1
 url	../plataforma/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:16
 urlpatterns	../dashboard/urls.py	/^urlpatterns = [$/;"	kind:variable	line:6
 urlpatterns	../plataforma/urls.py	/^urlpatterns = [$/;"	kind:variable	line:20
 urls.py	../dashboard/urls.py	1;"	kind:file	line:1
 urls.py	../plataforma/urls.py	1;"	kind:file	line:1
-valor	../dashboard/models.py	/^    valor = models.CharField(max_length=100)$/;"	kind:variable	line:38
+valor	../dashboard/models.py	/^    valor = models.CharField(max_length=100)$/;"	kind:variable	line:49
 views	../dashboard/urls.py	/^from . import views$/;"	kind:namespace	line:2
 views	../plataforma/urls.py	/^from . import views$/;"	kind:namespace	line:18
 views.py	../dashboard/views.py	1;"	kind:file	line:1
