@@ -26,6 +26,7 @@ EMAIL_HOST_PASSWORD	../plataforma/settings.py	/^EMAIL_HOST_PASSWORD = 'pedritoes
 EMAIL_HOST_USER	../plataforma/settings.py	/^EMAIL_HOST_USER = 'pedroesparzaaa@gmail.com'$/;"	kind:variable	line:32
 EMAIL_PORT	../plataforma/settings.py	/^EMAIL_PORT = 587$/;"	kind:variable	line:34
 EMAIL_USE_TLS	../plataforma/settings.py	/^EMAIL_USE_TLS = True$/;"	kind:variable	line:35
+HttpResponse	../dashboard/views.py	/^from django.http import HttpResponse$/;"	kind:namespace	line:4
 INSTALLED_APPS	../plataforma/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:40
 LANGUAGE_CODE	../plataforma/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:115
 MIDDLEWARE	../plataforma/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:51
@@ -77,6 +78,7 @@ dependencies	../dashboard/migrations/0001_initial.py	/^    dependencies = [$/;"	
 dependencies	../dashboard/migrations/0002_auto_20170819_2249.py	/^    dependencies = [$/;"	kind:variable	line:11
 descripcion	../dashboard/models.py	/^    descripcion = models.TextField()$/;"	kind:variable	line:14
 descripcion	../dashboard/models.py	/^    descripcion = models.TextField()$/;"	kind:variable	line:6
+detalleProyecto	../dashboard/views.py	/^def detalleProyecto(request, id_proyecto):$/;"	kind:function	line:53
 dispositivo	../dashboard/models.py	/^    dispositivo = models.ForeignKey(Dispositivo, default = 1)$/;"	kind:variable	line:33
 django	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
 django	../manage.py	/^            import django$/;"	kind:namespace	line:14
@@ -112,12 +114,13 @@ forms	../dashboard/forms.py	/^from django import forms$/;"	kind:namespace	line:1
 forms	../plataforma/forms.py	/^from django import forms$/;"	kind:namespace	line:1
 forms.py	../dashboard/forms.py	1;"	kind:file	line:1
 forms.py	../plataforma/forms.py	1;"	kind:file	line:1
-formularioDispositivo	../dashboard/views.py	/^def formularioDispositivo(request):$/;"	kind:function	line:31
-formularioProyecto	../dashboard/views.py	/^def formularioProyecto(request):$/;"	kind:function	line:14
+formularioDispositivo	../dashboard/views.py	/^def formularioDispositivo(request):$/;"	kind:function	line:36
+formularioProyecto	../dashboard/views.py	/^def formularioProyecto(request):$/;"	kind:function	line:19
+get_object_or_404	../dashboard/views.py	/^from django.shortcuts import render, get_object_or_404$/;"	kind:namespace	line:1
 get_wsgi_application	../plataforma/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:12
 include	../dashboard/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:1
 include	../plataforma/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:16
-index	../dashboard/views.py	/^def index(request):$/;"	kind:function	line:7
+index	../dashboard/views.py	/^def index(request):$/;"	kind:function	line:8
 index	../plataforma/views.py	/^def index(request):$/;"	kind:function	line:7
 initial	../dashboard/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:10
 issue	../plataforma/forms.py	/^    issue = forms.CharField(max_length=350)$/;"	kind:variable	line:5
@@ -167,7 +170,7 @@ os	../manage.py	/^import os$/;"	kind:namespace	line:2
 os	../plataforma/settings.py	/^import os$/;"	kind:namespace	line:13
 os	../plataforma/wsgi.py	/^import os$/;"	kind:namespace	line:10
 proyecto	../dashboard/models.py	/^    proyecto = models.ForeignKey(Proyecto, default = 1)$/;"	kind:variable	line:22
-render	../dashboard/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
+render	../dashboard/views.py	/^from django.shortcuts import render, get_object_or_404$/;"	kind:namespace	line:1
 render	../plataforma/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
 send_mail	../plataforma/views.py	/^from django.core.mail import send_mail$/;"	kind:namespace	line:2
 sensor	../dashboard/models.py	/^    sensor = models.ForeignKey(Sensor, default = 1)$/;"	kind:variable	line:42

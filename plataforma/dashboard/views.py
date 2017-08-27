@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Proyecto, Dispositivo
 from .forms import formProyecto,formDispositivo
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -48,3 +49,18 @@ def formularioDispositivo(request):
     }
 
     return render(request,'dashboard/dispositivos.html',context)
+
+def detalleProyecto(request, id_proyecto):
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+    form = formProyecto(instance=proyecto)
+    formDisp = formDispositivo()
+    context= {
+        'form':form,
+        'formDisp': formDisp,
+        'proyecto': proyecto
+    }
+    return render(request, 'dashboard/detalle-proyecto.html', context)
+    
+
+def detalleDispositivo(request, id_dispositivo):
+    return HttpResponse(id_dispositivo)

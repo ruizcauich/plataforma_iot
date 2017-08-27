@@ -1,0 +1,73 @@
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+{% block section_title %}
+    Proyectos
+{% endblock %}
+
+{% block dashboard_body %}
+        
+        <section class="row bg-blanco">
+            <div class="col-sm-10 col-sm-offset-1">
+                <h3 class="section-title">Datos del Proyecto</h3>
+                <form action="#" method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    {% include "dashboard/form_template.html" %}
+                    <div class="col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                </form>
+                <br>
+            </div>
+            
+        </section>
+        <section class="row">
+            <h4 class="section-title">Dispositivos del proyecto.
+                <a  data-toggle="modal" data-target="#myModal">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar nuevo proyecto
+                </a>
+            </h4>
+            {% for dispositivo in proyecto.dispositivo_set.all %}
+            <div class="bg-blanco col-sm-3 activity-label ">
+                <div class="actibity-label-title color-lightseagreen col-sm-10">
+                        {{dispositivo}}
+                </div>
+                <div class="activity-label-icon col-sm-2">
+                    <a href="{% url 'dashboard:detalle-dispositivo' dispositivo.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    
+                </div>
+                
+            </div>
+            {% endfor %}
+        </section>
+        
+
+       <!-- Button trigger modal -->
+       <div class="row">
+            
+        </div>
+        
+  
+  <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Nuevo Proyecto</h4>
+                    </div>
+                    <form action="{% url 'dashboard:dispositivos' %}" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            {% include "dashboard/form_template.html"  with form=formDisp %}
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+             
+{% endblock %}

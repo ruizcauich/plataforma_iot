@@ -44,9 +44,9 @@
             <div class="col-sm-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        {{proyecto.nombre_de_proyecto}}
-                        <a href="#" class="" >
+                        <a href="{% url 'dashboard:detalle-proyecto' proyecto.id %}" class="" > 
                             <span class="sr-only">Editar</span>
+                            {{proyecto.nombre_de_proyecto}}
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                     </div>

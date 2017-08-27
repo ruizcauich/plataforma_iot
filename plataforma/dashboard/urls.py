@@ -6,8 +6,12 @@ app_name = 'dashboard'
 urlpatterns = [
     #dashboard/
     url(r'^$', views.index ,name='index'),
-    #dashboard/proyecto
-    url(r'^proyectos/$', views.formularioProyecto, name = 'proyectos'),    
+    #dashboard/proyectos
+    url(r'^proyectos/$', views.formularioProyecto, name = 'proyectos'), 
+    #dashboard/proyectos/345
+    url(r'^proyectos/([0-9]+)$', views.detalleProyecto, name = 'detalle-proyecto'),       
     #dashboard/dispoitivos
     url(r'^dispositivos/$', views.formularioDispositivo, name = 'dispositivos'),
+    #dashboard/dispositivos/345
+    url(r'^dispositivos/([0-9]+)$', views.detalleDispositivo, name = 'detalle-dispositivo'),       
 ]
