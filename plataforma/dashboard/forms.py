@@ -21,7 +21,13 @@ class formDispositivo(forms.ModelForm):
             'esta_habilitado' : 'Habilitado',
             'fecha_creacion' : 'Fecha de Creación',
         }
-
+    def __init__(self, *args, **kwargs):
+        from django.forms.widgets import HiddenInput
+        hide = kwargs.pop('hide',None)
+        super(formDispositivo, self).__init__(*args, **kwargs)
+        if hide:
+            for field in hide:
+                self.fields[field].widget = HiddenInput()
 
 class formSensor(forms.ModelForm):
     class Meta:

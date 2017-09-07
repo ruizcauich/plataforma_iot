@@ -53,7 +53,7 @@ def formularioDispositivo(request):
 def detalleProyecto(request, id_proyecto):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     form = formProyecto(instance=proyecto)
-    formDisp = formDispositivo()
+    formDisp = formDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'])
     context= {
         'form':form,
         'formDisp': formDisp,
