@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^cuentas/', include('cuentas.urls')),
 ]
