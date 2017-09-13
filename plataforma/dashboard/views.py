@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Proyecto, Dispositivo
 from .forms import formProyecto,formDispositivo
 from django.http import HttpResponse
@@ -31,6 +31,15 @@ def formularioProyecto(request):
     }
 
     return render(request,'dashboard/proyectos.html',context)
+def modificarProyecto(request, id):
+
+    proyecto = get_object_or_404(Proyecto, pk=id)
+    form = formProyecto(request.POST or None, instance=proyecto)
+    
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect( 'dashboard:detalle-proyecto',proyecto.id)
 
 
 def formularioDispositivo(request):

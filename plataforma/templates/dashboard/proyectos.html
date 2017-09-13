@@ -41,14 +41,14 @@
         {% if proyectos %}
             <h3 class="section-title">Proyectos.</h3>
             {% for proyecto in proyectos  %}
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a href="{% url 'dashboard:detalle-proyecto' proyecto.id %}" class="" > 
                             <span class="sr-only">Editar</span>
-                            {{proyecto.nombre_de_proyecto}}
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
+                        {{proyecto.nombre_de_proyecto}}
                     </div>
                     <div class="panel-body">
                             {{proyecto.descripcion | truncatewords:30}}
