@@ -7,8 +7,8 @@ app_name = 'cuentas'
 
 urlpatterns = [
     #cuentas/
-    url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html')),
-    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='logout.html')),
+    url(r'^login/$', auth_views.LoginView.as_view(template_name='cuentas/login.html'), name='login'),
+    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='inicio.html'), name="logout"),
     url(r'^password_change/$',auth_views.PasswordChangeView.as_view(template_name='change-password.html')),
     url(r'^password_change/done/$', auth_views.PasswordChangeDoneView.as_view(template_name='change-password-done.html')),
     url(r'^password_reset/$', auth_views.PasswordResetView.as_view(template_name='password-reset.html')),

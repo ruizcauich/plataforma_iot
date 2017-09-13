@@ -63,7 +63,7 @@ section.body-content{
 
 
 
-a.carousel-caption{
+div.carousel-caption{
     left: 10%;
     right: auto;
     padding-top: 5px;

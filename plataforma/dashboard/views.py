@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Proyecto, Dispositivo
 from .forms import formProyecto,formDispositivo
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required(login_url = 'cuentas:login')
 def index(request):
     numero_proyectos = Proyecto.objects.count()
     numero_dispositivos = Dispositivo.objects.count()
