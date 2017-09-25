@@ -1,24 +1,33 @@
-<form class="form-horizontal" action="{{action}}" method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="id_usuario" class="control-label col-sm-3">
-            Usuario:
-        </label>
-        <div class="col-sm-9">
-            <input id="id_usuario" maxlength="30" name="username" type="text" class="form-control">
-        </div>
+{% extends 'base.html'%}
+{% block title%}Inicio-IoT {% endblock %}
+{% block template_components %}
+{% endblock %}
+{% load staticfiles %}
+{% block body %}
+    <style>
+        #container{
+            /*background-image: url(http://i2.esmas.com/2016/07/26/879511/smarthome-624x351.jpg);*/
+            background-image: url({% static 'img/landing/internet-de-las-cosas-maquinas-conexion-recurso-bbva-1920x0-c-f.jpg'%});
+            background-position-y: 50px;
+            background-size: 100% 100%;
+            display: block;
+            min-height:100%;
+            min-width: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0;
+            padding-top: 80px;
+        }
+    </style>
+    <div id="container" style="">
+            <div class="col-sm-4 col-sm-offset-4 bg-success">
+                <h3>Inicio se sesión.</h3>
+                {% include 'cuentas/login_form.html' %}
+                <p class="text-center text-warning">
+                    ¿Aún no tienes una cuenta?, <a href="#">¡Crea un usuario</a> y empieza 
+                    a crear tus propios proyectos.!
+                </p>
+            </div>
     </div>
-    <div class="form-group">
-        <label for="id_contrasena" class="control-label col-sm-3">
-            Contraseña:
-        </label>
-        <div class="col-sm-9">
-            <input id="id_contrasena" maxlength="30" name="password" type="password" class="form-control">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-success">Iniciar sesión</button>
-        </div>
-    </div>
-</form>
+    
+{% endblock %}

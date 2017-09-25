@@ -16,7 +16,7 @@ def index(request):
 
     return render(request,'dashboard/plataforma-ejemplo.html',context)
 
-
+@login_required(login_url = 'cuentas:login')
 def formularioProyecto(request):
 
     form = formProyecto(request.POST or None)
@@ -32,6 +32,9 @@ def formularioProyecto(request):
     }
 
     return render(request,'dashboard/proyectos.html',context)
+
+
+@login_required(login_url = 'cuentas:login')
 def modificarProyecto(request, id):
 
     proyecto = get_object_or_404(Proyecto, pk=id)
@@ -43,6 +46,7 @@ def modificarProyecto(request, id):
         return redirect( 'dashboard:detalle-proyecto',proyecto.id)
 
 
+@login_required(login_url = 'cuentas:login')
 def formularioDispositivo(request):
 
     form = formDispositivo(request.POST or None)
@@ -60,6 +64,8 @@ def formularioDispositivo(request):
 
     return render(request,'dashboard/dispositivos.html',context)
 
+
+@login_required(login_url = 'cuentas:login')
 def detalleProyecto(request, id_proyecto):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     form = formProyecto(instance=proyecto)
@@ -72,5 +78,7 @@ def detalleProyecto(request, id_proyecto):
     return render(request, 'dashboard/detalle-proyecto.html', context)
     
 
+
+@login_required(login_url = 'cuentas:login')
 def detalleDispositivo(request, id_dispositivo):
     return HttpResponse(id_dispositivo)

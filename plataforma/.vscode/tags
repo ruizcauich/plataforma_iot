@@ -90,8 +90,8 @@ dependencies	../dashboard/migrations/0001_initial.py	/^    dependencies = [$/;"	
 dependencies	../dashboard/migrations/0002_auto_20170819_2249.py	/^    dependencies = [$/;"	kind:variable	line:11
 descripcion	../dashboard/models.py	/^    descripcion = models.TextField()$/;"	kind:variable	line:14
 descripcion	../dashboard/models.py	/^    descripcion = models.TextField()$/;"	kind:variable	line:6
-detalleDispositivo	../dashboard/views.py	/^def detalleDispositivo(request, id_dispositivo):$/;"	kind:function	line:75
-detalleProyecto	../dashboard/views.py	/^def detalleProyecto(request, id_proyecto):$/;"	kind:function	line:63
+detalleDispositivo	../dashboard/views.py	/^def detalleDispositivo(request, id_dispositivo):$/;"	kind:function	line:83
+detalleProyecto	../dashboard/views.py	/^def detalleProyecto(request, id_proyecto):$/;"	kind:function	line:69
 dispositivo	../dashboard/models.py	/^    dispositivo = models.ForeignKey(Dispositivo, default = 1)$/;"	kind:variable	line:33
 django	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
 django	../manage.py	/^            import django$/;"	kind:namespace	line:14
@@ -127,7 +127,7 @@ forms	../dashboard/forms.py	/^from django import forms$/;"	kind:namespace	line:1
 forms	../plataforma/forms.py	/^from django import forms$/;"	kind:namespace	line:1
 forms.py	../dashboard/forms.py	1;"	kind:file	line:1
 forms.py	../plataforma/forms.py	1;"	kind:file	line:1
-formularioDispositivo	../dashboard/views.py	/^def formularioDispositivo(request):$/;"	kind:function	line:46
+formularioDispositivo	../dashboard/views.py	/^def formularioDispositivo(request):$/;"	kind:function	line:50
 formularioProyecto	../dashboard/views.py	/^def formularioProyecto(request):$/;"	kind:function	line:20
 get_object_or_404	../dashboard/views.py	/^from django.shortcuts import render, get_object_or_404, redirect$/;"	kind:namespace	line:1
 get_wsgi_application	../plataforma/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:12
@@ -166,7 +166,7 @@ models	../dashboard/migrations/0002_auto_20170819_2249.py	/^import django.db.mod
 models	../dashboard/models.py	/^from django.db import models$/;"	kind:namespace	line:1
 models.py	../cuentas/models.py	1;"	kind:file	line:1
 models.py	../dashboard/models.py	1;"	kind:file	line:1
-modificarProyecto	../dashboard/views.py	/^def modificarProyecto(request, id):$/;"	kind:function	line:35
+modificarProyecto	../dashboard/views.py	/^def modificarProyecto(request, id):$/;"	kind:function	line:38
 name	../cuentas/apps.py	/^    name = 'cuentas'$/;"	kind:variable	line:5
 name	../dashboard/apps.py	/^    name = 'dashboard'$/;"	kind:variable	line:5
 name	../dashboard/migrations/0001_initial.py	/^            name='Campo',$/;"	kind:variable	line:17
@@ -197,7 +197,6 @@ send_mail	../plataforma/views.py	/^from django.core.mail import send_mail$/;"	ki
 sensor	../dashboard/models.py	/^    sensor = models.ForeignKey(Sensor, default = 1)$/;"	kind:variable	line:42
 settings.py	../plataforma/settings.py	1;"	kind:file	line:1
 sys	../manage.py	/^import sys$/;"	kind:namespace	line:3
-template_name	../cuentas/urls.py	/^        template_name='password-reset-confirm.html')),$/;"	kind:variable	line:17
 tests.py	../cuentas/tests.py	1;"	kind:file	line:1
 tests.py	../dashboard/tests.py	1;"	kind:file	line:1
 tipo	../dashboard/models.py	/^    tipo = models.CharField(max_length = 40)$/;"	kind:variable	line:30
