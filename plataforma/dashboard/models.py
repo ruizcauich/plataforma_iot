@@ -1,7 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Proyecto(models.Model):
+    usuario = models.ForeignKey(User, default=1)
     nombre_de_proyecto = models.CharField( max_length = 80)
     descripcion = models.TextField()
 
@@ -13,8 +14,8 @@ class Dispositivo(models.Model):
     nombre_de_dispositivo = models.CharField(max_length = 80)
     descripcion = models.TextField()
     tipo = models.CharField(max_length=40)
-    latitud = models.FloatField()
-    longitud = models.FloatField()
+    latitud = models.FloatField(blank=True)
+    longitud = models.FloatField(blank=True)
     esta_habilitado = models.BooleanField(default = True)
     fecha_creacion = models.DateTimeField( auto_now_add=True )
     # apikey no está implemetado por el momento
@@ -31,7 +32,7 @@ class Sensor(models.Model):
     fecha_creacion = models.DateTimeField( auto_now_add=True )
     esta_habilitado = models.BooleanField(default = True)
     dispositivo = models.ForeignKey(Dispositivo, default = 1)
-
+    
     def __str__(self):
         return self.nombre_de_sensor
 

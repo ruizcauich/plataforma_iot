@@ -7,8 +7,13 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url = 'cuentas:login')
 def index(request):
-    numero_proyectos = Proyecto.objects.count()
-    numero_dispositivos = Dispositivo.objects.count()
+    proyectos = Proyecto.objects.filter(usuario=request.user)
+    numero_proyectos = proyectos.count()
+    numero_dispositivos = 0
+    for pro in proyectos:
+        for dis in pro.dispositivo_set.all():
+            numero_dispositivos+=1
+
     context = { 
         'numero_proyectos':numero_proyectos,
         'numero_dispositivos':numero_dispositivos,
@@ -22,10 +27,11 @@ def formularioProyecto(request):
     form = formProyecto(request.POST or None)
     if form.is_valid():
         proyecto = form.save()
+        proyecto.usuario = request.user
         form = formProyecto()
 
     
-    proyectos = Proyecto.objects.all()
+    proyectos = Proyecto.objects.filter(usuario=request.user)
     context = {
         'form': form,
         'proyectos': proyectos
@@ -55,8 +61,12 @@ def formularioDispositivo(request):
         proyecto = form.save()
         form = formDispositivo()
 
+    #Obtenemos todos los proyectos, enseguida los dispositios pertenecientes a estos
+    dispositivos = []
+    proyectos = Proyecto.objects.filter(usuario=request.user)
+    for pro in proyectos:
+        dispositivos += pro.dispositivo_set.all()
     
-    dispositivos = Dispositivo.objects.all()
     context = {
         'form': form,
         'dispositivos':dispositivos,

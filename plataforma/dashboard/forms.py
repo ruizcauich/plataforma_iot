@@ -4,12 +4,13 @@ from .models import Proyecto, Dispositivo, Sensor, Campo, Valor
 class formProyecto(forms.ModelForm):
     class Meta:
         model = Proyecto
-        fields = '__all__'
+        fields = ['nombre_de_proyecto','descripcion' ]
         labels = {
             'nombre_de_proyecto': 'Nombre del Proyecto',
             'descripcion': 'Descripción',
         }
-     
+    
+    
 
 class formDispositivo(forms.ModelForm):
     class Meta:
