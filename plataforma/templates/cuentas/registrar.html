@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-{% block title%}Registro de cuenta {% endblock %}
+{% block title%}Resgistro de cuenta {% endblock %}
 {% block template_components %}
 {% endblock %}
 {% load staticfiles %}
@@ -22,8 +22,7 @@
     <div id="container" style="">
             <div class="col-sm-4 col-sm-offset-4 bg-success">
                 <h3>Crear cuenta.</h3>
-                <form action="" class=" form-horizontal" method="post">
-                    {% csrf_token %}
+                <form action="" class=" form-horizontal">
                     {% include 'dashboard/form_template.html' %}
                     <div class="col-sm-offset-3">
                             <button class="btn btn-primary" type="submit">Registrar</button>
