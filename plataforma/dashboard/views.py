@@ -25,11 +25,15 @@ def index(request):
 def formularioProyecto(request):
 
     form = formProyecto(request.POST or None)
+
     if form.is_valid():
         proyecto = form.save()
         proyecto.usuario = request.user
         form = formProyecto()
+        proyecto.save()
 
+
+    
     
     proyectos = Proyecto.objects.filter(usuario=request.user)
     context = {
