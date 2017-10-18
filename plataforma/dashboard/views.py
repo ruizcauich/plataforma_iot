@@ -29,6 +29,7 @@ def formularioProyecto(request):
         proyecto = form.save()
         proyecto.usuario = request.user
         form = formProyecto()
+        proyecto.save()
 
     
     proyectos = Proyecto.objects.filter(usuario=request.user)
