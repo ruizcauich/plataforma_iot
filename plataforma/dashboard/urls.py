@@ -11,6 +11,8 @@ urlpatterns = [
     #dashboard/proyectos/345
     url(r'^proyectos/([0-9]+)$', views.detalleProyecto, name = 'detalle-proyecto'),       
     url(r'^proyectos/([0-9]+)/modificar$', views.modificarProyecto, name = 'modificar-proyecto'),       
+    #dashboard/proyectos/345/obtenerCoordenadas
+    url(r'^proyectos/([0-9]+)/obtenerCoordenadas$', views.obtenerCoordenadas, name = 'obtener-coordenadas'),       
     #dashboard/dispoitivos
     url(r'^dispositivos/$', views.formularioDispositivo, name = 'dispositivos'),
     #dashboard/dispositivos/345

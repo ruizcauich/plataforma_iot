@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Proyecto, Dispositivo
 from .forms import formProyecto,formDispositivo
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 
 # Create your views here.
 @login_required(login_url = 'cuentas:login')
@@ -93,3 +94,16 @@ def detalleProyecto(request, id_proyecto):
 @login_required(login_url = 'cuentas:login')
 def detalleDispositivo(request, id_dispositivo):
     return HttpResponse(id_dispositivo)
+
+def obtenerCoordenadas(request, id_proyecto):
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+
+    dispositivos = proyecto.dispositivo_set.all()
+    lista_de_datos = []
+    for dispositivo in dispositivos:
+        lista_de_datos.append(   [dispositivo.latitud, dispositivo.longitud ]  )
+
+    datos={
+        'dispositivos' : lista_de_datos
+    }
+    return JsonResponse( datos ) 

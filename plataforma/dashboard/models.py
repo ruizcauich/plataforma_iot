@@ -14,8 +14,8 @@ class Dispositivo(models.Model):
     nombre_de_dispositivo = models.CharField(max_length = 80)
     descripcion = models.TextField()
     tipo = models.CharField(max_length=40)
-    latitud = models.FloatField(blank=True)
-    longitud = models.FloatField(blank=True)
+    latitud = models.FloatField(blank=True, null=True)
+    longitud = models.FloatField(blank=True, null=True)
     esta_habilitado = models.BooleanField(default = True)
     fecha_creacion = models.DateTimeField( auto_now_add=True )
     # apikey no está implemetado por el momento
