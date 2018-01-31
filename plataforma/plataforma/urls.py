@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^cuentas/', include('cuentas.urls')),
+    url(r'^api/', include('api.urls')),
 ]
