@@ -1,9 +1,13 @@
+#IMPORTS DJANGO
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Proyecto, Dispositivo
-from .forms import formProyecto,formDispositivo
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.contrib.auth.models import User
+#IMPORTS PLATAFORMA
+from .models import Proyecto, Dispositivo, Sensor
+from .forms import formProyecto,formDispositivo
+import json
 
 # Create your views here.
 @login_required(login_url = 'cuentas:login')
@@ -15,7 +19,8 @@ def index(request):
         for dis in pro.dispositivo_set.all():
             numero_dispositivos+=1
 
-    context = { 
+    context = {
+        'proyectos': proyectos,
         'numero_proyectos':numero_proyectos,
         'numero_dispositivos':numero_dispositivos,
     }
@@ -106,4 +111,38 @@ def obtenerCoordenadas(request, id_proyecto):
     datos={
         'dispositivos' : lista_de_datos
     }
-    return JsonResponse( datos ) 
+    return JsonResponse( datos )
+
+
+@login_required(login_url = 'cuentas:login')
+def configuracion(request):
+
+    usuario = request.user
+
+    context = {'usuario': usuario}
+
+    return render(request, 'dashboard/configuracion.html', context)
+
+
+@login_required(login_url = 'cuentas:login')
+def redProyecto(request):
+
+    id_proyecto = request.GET['id']
+
+    proyecto = Proyecto.objects.get(pk = id_proyecto)
+    dispositivos = Dispositivo.objects.filter(proyecto=proyecto)
+
+    lista_dispositivos = []
+    
+    for dispo in dispositivos:
+        dict_aux = {'dispositivos': dispo.nombre_de_dispositivo,'sensores': 0 }
+        lista_sensores = []
+
+        for sensor in Sensor.objects.filter(dispositivo = dispo.pk):
+            lista_sensores.append(sensor.nombre_de_sensor)
+            
+        dict_aux['sensores'] = lista_sensores
+        lista_dispositivos.append(dict_aux)
+
+
+    return HttpResponse(json.dumps(lista_dispositivos), content_type='application/json')

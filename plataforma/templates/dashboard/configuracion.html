@@ -1,0 +1,63 @@
+{% extends 'dashboard/base.html' %}
+{% load staticfiles %}
+{% block section_title %}
+    Configuracion
+{% endblock %}
+
+{% block dashboard_body %}
+
+<div class="row">
+    <form action="" method="post" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-xs-12 col-md-4">
+            <div class="thumbnail">
+                    <img src="{% static 'img/user_pic.png'%}" class="img-responsive" alt="">
+                    <div class="caption">
+                        <input type="file" class="btn btn-success btn-block">
+                    </div>
+            </div>
+            
+            
+        </div>
+        <div class="col-xs-12 col-md-7 bg-blanco">
+            <h3>Datos de usuario.</h3>
+            
+            <div class="form-group">
+                <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="{{usuario.username}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="imail" name="email" class="form-control" placeholder="{{usuario.email}}">
+                    </div>
+            </div>
+            <br>
+            <span> <h4>Seguridad</h4></span>
+            <div class="form-group">
+                    <label for="pass-act" class="col-sm-3 control-label">Contraseña actual</label>
+                    <div class="col-sm-9">
+                        <input type="password" value="contrasenia" id="pass-act" name="pass-act" class="form-control">
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="pass" class="col-sm-3 control-label">Contraseña nueva</label>
+                    <div class="col-sm-9">
+                        <input type="password" value="" id="pass" name="pass" class="form-control">
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4">
+                    <button type="submit" class="btn btn-info">Actualizar Datos</button>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>
+
+{% endblock %}

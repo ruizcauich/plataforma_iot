@@ -4,9 +4,13 @@
     {% block section_title %}
     {% endblock %}
 {% endblock %}
-{% block template_components %} 
-    <link rel="stylesheet" href="{% static '/css/plataforma.css' %}">
 
+{% block template_components %}
+    <link rel="stylesheet" href="{% static '/css/plataforma.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    {% block extra %}
+      
+    {% endblock extra %}
 {% endblock %}
 
 {% block body %}
@@ -53,7 +57,7 @@
                     <span class="glyphicon glyphicon-file"></span>
                     Reportes
                 </a>
-                <a href="" class="list-group-item">
+                <a href="{% url 'dashboard:configuracion'%}" class="list-group-item">
                     <span class="glyphicon glyphicon-wrench"></span>
                     Config
 
@@ -72,4 +76,8 @@
         {% block dashboard_body %}
         {% endblock %}
     </div>
+
+    {% block javascript %}
+      
+    {% endblock %}
 {% endblock %}

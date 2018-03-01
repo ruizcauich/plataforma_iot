@@ -4,83 +4,150 @@
     Inicio
 {% endblock %}
 
+{% block extra %}
+    <link rel="stylesheet" href="{% static '/css/plataforma_ejemplo.css' %}">
+    <link rel="stylesheet" href="{% static '/css/vis.min.css' %}">
+    <script src="{% static '/js/vis.min.js'%}"></script>
+{% endblock extra %}
+
 {% block dashboard_body %}
-        <div class="row text-right">
-            <div class="bg-blanco col-sm-3 activity-label ">
-                <div class="col-sm-9 actibity-label-title">
-                    <span class="color-teal"><strong> {{numero_proyectos}} </strong></span> <br>
-                    <span class="color-lightseagreen">Proyectos</span>
+    <div class="row text-right">
+        <div class="bg-blanco col-sm-3 activity-label ">
+            <div class="col-sm-9 actibity-label-title">
+                <span class="color-teal"><strong> {{numero_proyectos}} </strong></span> <br>
+                <span class="color-lightseagreen">Proyectos</span>
+            </div>
+            <div class="activity-label-icon col-sm-3">
+                <span style="font-size:30px" class="glyphicon glyphicon-folder-open"></span>
+            </div>
+            
+        </div> 
+        <div class="activity-label bg-blanco col-sm-3">
+                <div class="col-sm-9 actibity-title">
+                    <span class="color-teal"><strong> {{numero_dispositivos}} </strong></span> <br>
+                    <span class="color-lightseagreen">Dispositivos</span>
                 </div>
                 <div class="activity-label-icon col-sm-3">
-                    <span style="font-size:30px" class="glyphicon glyphicon-folder-open"></span>
+                    <span style="font-size:30px" class="glyphicon glyphicon-hdd"></span>
                 </div>
                 
-            </div> 
-            <div class="activity-label bg-blanco col-sm-3">
-                    <div class="col-sm-9 actibity-title">
-                        <span class="color-teal"><strong> {{numero_dispositivos}} </strong></span> <br>
-                        <span class="color-lightseagreen">Dispositivos</span>
-                    </div>
-                    <div class="activity-label-icon col-sm-3">
-                        <span style="font-size:30px" class="glyphicon glyphicon-hdd"></span>
-                    </div>
-                    
-                </div> 
         </div>
-        
-        <div class="row">
-            <form action="" method="post" class="form-horizontal">
-                {% csrf_token %}
-                <div class="col-xs-12 col-md-4">
-                    <div class="thumbnail">
-                            <img src="{% static 'img/user_pic.png'%}" class="img-responsive" alt="">
-                            <div class="caption">
-                                <input type="file" class="btn btn-success btn-block">
-                            </div>
-                    </div>
-                    
-                    
-                </div>
-                <div class="col-xs-12 col-md-7 bg-blanco">
-                    <h3>Datos de usuario.</h3>
-                    
-                    <div class="form-group">
-                        <label for="nombre" class="col-sm-3 control-label">Nombre</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label">E-mail</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="imail" name="email" class="form-control" placeholder="Correo">
-                            </div>
-                    </div>
-                    <br>
-                    <span> <h4>Seguridad</h4></span>
-                    <div class="form-group">
-                            <label for="pass-act" class="col-sm-3 control-label">Contraseña actual</label>
-                            <div class="col-sm-9">
-                                <input type="password" value="something" id="pass-act" name="pass-act" class="form-control">
-                            </div>
-                    </div>
-                    <div class="form-group">
-                            <label for="pass" class="col-sm-3 control-label">Contraseña nueva</label>
-                            <div class="col-sm-9">
-                                <input type="password" value="" id="pass" name="pass" class="form-control">
-                            </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-4">
-                            <button type="submit" class="btn btn-info">Actualizar Datos</button>
-                        </div>
-                    </div>
-                    
-                </div>
-            </form>
+    </div>
+    {% if proyectos %}
+        <div class="contenedor_proyectos">
+            <select id="seleccion" onchange="ajax(this)" class="form-control">
+                <option>Elije un Proyecto</option>
+                {% for proyecto in proyectos %}
+                    <option value="{{proyecto.id}}:{{proyecto.nombre_de_proyecto}}">{{proyecto.nombre_de_proyecto}}</option>
+                {% endfor%}
+            </select>
         </div>
-    
+    {% endif %}
+
+    <div id="red"></div>
+
+
+    {% block javascript %}
+        <script>
+
+            function ajax(sel){
+
+                var cadena = sel.value;
+
+                proyecto_id = cadena.split(':')[0]
+                proyecto_nombre = cadena.split(':')[1]
+
+                
+                
+                $.ajax({
+                    data: {'id': proyecto_id},
+                    url: '/dashboard/red-proyecto/',
+                    type: 'GET',
+                    success: function(data){
+                        graficar_proyecto(data,proyecto_nombre);
+
+                    }
+
+                });
+            }
+
+            function graficar_proyecto(data,proyecto_nombre){
+
+                var nodesArray = new Array();
+                var contador = 0
+            
+
+                for(var i = 0 ; i < data.length ; i++){
+                    nodesArray[i] = {id: i+1, label: data[i].dispositivos ,group:2};
+                    contador++;
+                }
+
+                
+                var nodes = new vis.DataSet(nodesArray);
+
+                
+                
+                for(var i = 0; i < nodesArray.length; i++){
+                    for( var j = 0; j < data[i].sensores.length; j++){
+                        nodes.add({id: contador+1, label: data[i].sensores[j], group:3, nombreDispositivo: data[i].dispositivos})
+                        contador++;
+                    }
+                }
+
+                nodes.add({id: 0, label: proyecto_nombre, group:1, first:true, fixed: true})
+                
+
+                var nodesEdges = new Array();
+                
+
+                var proyecto =  nodes.get(0);
+                var dispositivos = nodes.get({filter: function(item){return item.group == 2;}})
+                var sensores = nodes.get({filter: function(item){return item.group == 3;}})
+                
+            
+
+                for(var i = 0; i < dispositivos.length; i++){
+                    nodesEdges.push( {from: proyecto.id, to: dispositivos[i].id});
+                    for(var j = 0; j < sensores.length; j++){
+                        if( dispositivos[i].label == sensores[j].nombreDispositivo){
+                            nodesEdges.push({from: dispositivos[i].id, to: sensores[j].id});
+                        }
+                    }
+                }
+
+
+                var edges = new vis.DataSet(nodesEdges);
+
+                //Create a network
+                var container = document.getElementById('red')
+
+                //provide the data in the vis format
+                var data = {nodes: nodes, edges: edges};
+
+                var options = {
+                    nodes:{
+                        shape: 'dot',
+                        size: 18,
+                        font:{
+                            size: 18,
+                            color: '#38477a',
+                        },
+                        borderWidth: 2
+                    },
+                    edges: {
+                        width: 3
+                    },
+                    groups:{
+                        
+                    }
+                }
+
+
+                //Initialize your network!
+                var network =  new vis.Network(container,data,options)
+
+            }
+        </script>
+    {% endblock %}
 
 {% endblock %}
