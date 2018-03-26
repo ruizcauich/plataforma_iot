@@ -1,7 +1,7 @@
 from django import forms
 from .models import Proyecto, Dispositivo, Sensor, Campo, Valor
 
-class formProyecto(forms.ModelForm):
+class FormProyecto(forms.ModelForm):
     class Meta:
         model = Proyecto
         fields = ['nombre_de_proyecto','descripcion' ]
@@ -12,7 +12,7 @@ class formProyecto(forms.ModelForm):
     
     
 
-class formDispositivo(forms.ModelForm):
+class FormDispositivo(forms.ModelForm):
     class Meta:
         model = Dispositivo
         fields = '__all__'
@@ -30,7 +30,7 @@ class formDispositivo(forms.ModelForm):
             for field in hide:
                 self.fields[field].widget = HiddenInput()
 
-class formSensor(forms.ModelForm):
+class FormSensor(forms.ModelForm):
     class Meta:
         model = Sensor
         fields = '__all__'
@@ -42,7 +42,7 @@ class formSensor(forms.ModelForm):
 
 
 
-class formCampo(forms.ModelForm):
+class FormCampo(forms.ModelForm):
     class Meta:
         model = Campo
         fields = '__all__'
@@ -53,7 +53,7 @@ class formCampo(forms.ModelForm):
 
 
 
-class formValor(forms.ModelForm):
+class FormValor(forms.ModelForm):
     model = Valor
     fields = '__all__'
     labels = {

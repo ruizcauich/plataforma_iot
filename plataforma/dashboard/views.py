@@ -6,10 +6,10 @@ from django.core import serializers
 from django.contrib.auth.models import User
 #IMPORTS PLATAFORMA
 from .models import Proyecto, Dispositivo, Sensor
-from .forms import formProyecto,formDispositivo
+from .forms import FormProyecto,FormDispositivo
 import json
 
-# Create your views here.
+
 @login_required(login_url = 'cuentas:login')
 def index(request):
     proyectos = Proyecto.objects.filter(usuario=request.user)
@@ -27,14 +27,19 @@ def index(request):
 
     return render(request,'dashboard/plataforma-ejemplo.html',context)
 
+
+# ==================
+#   VISTAS CORRESPONDIENTES A PROYECTOS
+# ==================
+# VISTA PARA CREAR UN PROYECTO
 @login_required(login_url = 'cuentas:login')
 def formularioProyecto(request):
 
-    form = formProyecto(request.POST or None)
+    form = FormProyecto(request.POST or None)
     if form.is_valid():
         proyecto = form.save()
         proyecto.usuario = request.user
-        form = formProyecto()
+        form = FormProyecto()
         proyecto.save()
 
     
@@ -51,7 +56,7 @@ def formularioProyecto(request):
 def modificarProyecto(request, id):
 
     proyecto = get_object_or_404(Proyecto, pk=id)
-    form = formProyecto(request.POST or None, instance=proyecto)
+    form = FormProyecto(request.POST or None, instance=proyecto)
     
 
     if request.method == 'POST' and form.is_valid():
@@ -60,13 +65,30 @@ def modificarProyecto(request, id):
 
 
 @login_required(login_url = 'cuentas:login')
+def detalleProyecto(request, id_proyecto):
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+    form = FormProyecto(instance=proyecto)
+    formDisp = FormDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'])
+    context= {
+        'form':form,
+        'formDisp': formDisp,
+        'proyecto': proyecto
+    }
+    return render(request, 'dashboard/detalle-proyecto.html', context)
+
+
+# ==================
+#   VISTAS CORRESPONDIENTES A DISPOSITIVOS
+# ==================
+# VISTA PARA CREAR UN DISPOSITIVO
+@login_required(login_url = 'cuentas:login')
 def formularioDispositivo(request):
 
-    form = formDispositivo(request.POST or None)
+    form = FormDispositivo(request.POST or None)
 
     if form.is_valid():
         proyecto = form.save()
-        form = formDispositivo()
+        form = FormDispositivo()
 
     #Obtenemos todos los proyectos, enseguida los dispositios pertenecientes a estos
     dispositivos = []
@@ -82,18 +104,19 @@ def formularioDispositivo(request):
     return render(request,'dashboard/dispositivos.html',context)
 
 
+# VISTA PARA LA MODIFICACIÓN DE DATOS DE ALGÚN DISPOSITIVO
 @login_required(login_url = 'cuentas:login')
-def detalleProyecto(request, id_proyecto):
-    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
-    form = formProyecto(instance=proyecto)
-    formDisp = formDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'])
-    context= {
-        'form':form,
-        'formDisp': formDisp,
-        'proyecto': proyecto
-    }
-    return render(request, 'dashboard/detalle-proyecto.html', context)
+def modificarDispositivo(request, id):
+    # Se obtiene el dispositivo
+    dispositivo = get_object_or_404(Dispositivo, pk=id)
+    # Se llena el formulario con los datos obtenidos y se relaciona 
+    # a la instancia del dispositivo correspondiente
+    form = FormDispositivo(request.POST or None, instance=dispositivo)
     
+    # Si el formulario es válido
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect( 'dashboard:detalle-dispositivo',dispositivo.id)
 
 
 @login_required(login_url = 'cuentas:login')
