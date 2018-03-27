@@ -8,9 +8,9 @@
     <!--<meta http-equiv="refresh" content="2; url=index.html">-->
     <title>{% block titulo %} Panel de Control {% endblock %}</title>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="static/css/dashboard/vis.min.css">
-    <link rel="stylesheet" href="static/css/botones.css">
-    <link rel="stylesheet" href="static/css/dashboard/style.css">
+    <link rel="stylesheet" href="{% static '/css/botones.css' %}">
+    <link rel="stylesheet" href="{% static '/css/dashboard/style.css' %}">
+    
     {% block links_templates %}
     {% endblock %}
     
@@ -22,14 +22,14 @@
         <aside id="tablero">
             <header>
                 <figure class="marca">
-                    <img src="static/img/logo.png" alt="This is the logo">
+                    <img src="{% static '/img/logo.png' %}" alt="This is the logo">
                 </figure>
                 <section class="info-usuario">
                     <figure>
-                        <img src="static/img/avatar/usr.jpg" alt="avatar">
+                        <img src="{% static '/img/avatar/usr.jpg' %}" alt="avatar">
                         <figcaption>
                             <span class="nueva-linea">¡Bienvenido!</span>
-                            <span class="nueva-linea"><strong>Augusto Ruiz</strong></span>
+                            <span class="nueva-linea"><strong>{% block usuario %} {%endblock%}</strong></span>
                         </figcaption>
                     </figure>
                 </section>

@@ -12,20 +12,26 @@ import json
 
 @login_required(login_url = 'cuentas:login')
 def index(request):
+    usuario = User.objects.get(username=request.user)
     proyectos = Proyecto.objects.filter(usuario=request.user)
     numero_proyectos = proyectos.count()
     numero_dispositivos = 0
+    numero_sensores = 0
     for pro in proyectos:
         for dis in pro.dispositivo_set.all():
             numero_dispositivos+=1
+            for sen in dis.sensor_set.all():
+                numero_sensores+=1
 
     context = {
         'proyectos': proyectos,
         'numero_proyectos':numero_proyectos,
         'numero_dispositivos':numero_dispositivos,
+        'numero_sensores':numero_sensores,
+        'usuario': usuario,
     }
 
-    return render(request,'dashboard/plataforma-ejemplo.html',context)
+    return render(request,'dashboard/index_n.html',context)
 
 
 # ==================

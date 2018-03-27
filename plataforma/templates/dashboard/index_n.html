@@ -1,0 +1,63 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %} Panel de Control {% endblock %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/index.css' %}">
+{% endblock %}
+
+{% block usuario %}
+{{usuario}}
+{% endblock %}
+
+{%block titulo_cabecera %} Panel de Control {% endblock %}
+
+{% block contenido %}
+<div class="contenedor-articulos">
+    <article class="articulo">
+        <div class="articulo-header">
+            <h2 class="titulo-articulo">Proyectos</h2>
+            <span class="articulo-descripcion">Tus proyectos IoT...</span>
+        </div>
+        <div class="articulo-contenido">
+            <span class="ion-network"></span>
+            <span class="numero">{{numero_proyectos}}</span>
+            <a href="" class="boton boton-informacion">Ver mas..</a>
+        </div>
+    </article>
+    <article class="articulo">
+            <div class="articulo-header">
+                <h2 class="titulo-articulo">Dispositivos</h2>
+                <span class="articulo-descripcion">Componentes de tus proyectos IoT...</span>
+            </div>
+            <div class="articulo-contenido">
+                <span class="ion-ipad"></span>
+                <span class="numero">{{numero_dispositivos}}</span>
+                <a href="" class="boton boton-informacion">Ver mas..</a>
+            </div>
+    </article>
+    <article class="articulo">
+            <div class="articulo-header">
+                <h2 class="titulo-articulo">Sensores</h2>
+                <span class="articulo-descripcion">Escuchan a su alrededor....</span>
+            </div>
+            <div class="articulo-contenido">
+                <span class="ion-headphone"></span>
+                <span class="numero">{{numero_sensores}}</span>
+                <a href="" class="boton boton-informacion">Ver mas..</a>
+            </div>
+    </article>
+    <article class="articulo">
+            <div class="articulo-header">
+                <h2 class="titulo-articulo">Reportes</h2>
+                <span class="articulo-descripcion">Entiende lo que las cosas te quieren decir...</span>
+            </div>
+            <div class="articulo-contenido">
+                <span class="ion-clipboard"></span>
+                <span class="numero">0</span>
+                <a href="" class="boton boton-informacion">Ver mas..</a>
+            </div>
+    </article>
+</div>
+{% endblock %}
