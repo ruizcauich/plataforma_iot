@@ -106,12 +106,16 @@ def obtenerCoordenadas(request, id_proyecto):
     dispositivos = proyecto.dispositivo_set.all()
     lista_de_datos = []
     for dispositivo in dispositivos:
-        lista_de_datos.append(   [dispositivo.latitud, dispositivo.longitud ]  )
+        lista_de_datos.append([dispositivo.nombre_de_dispositivo,dispositivo.latitud, dispositivo.longitud ])
 
     datos={
-        'dispositivos' : lista_de_datos
+        "dispositivos" : lista_de_datos
     }
-    return JsonResponse( datos )
+
+    #return HttpResponse(json.dumps(lista_dispositivos), content_type='application/json')
+    #return JsonResponse( datos )
+    return HttpResponse(json.dumps(datos),content_type='application/json')
+    
 
 
 @login_required(login_url = 'cuentas:login')

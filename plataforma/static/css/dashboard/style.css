@@ -1,0 +1,357 @@
+/* 
+    ====================================
+    CONFIGURACIÓN GLOBAL DE ESTILOS
+    ====================================
+*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+@font-face{
+    font-family: "Nunito";
+    src:url('../fonts/Nunito-Regular.ttf');
+}
+
+@font-face{
+        font-family: "Raleway";
+        src:url('../fonts/Raleway-Regular.ttf');
+}
+
+
+body,textarea{ font-family: 'Nunito','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 16px; font-weight: 100; position: relative}
+
+
+body, #tablero, #tablero > nav >ul li{background-color: #304961;}
+
+h1,h2,h3,h4{
+    font-family: 'Raleway', sans-serif , cursive;
+}
+
+.contenedor{
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+#tablero{
+    width: 20%;
+    overflow: hidden;
+    z-index: 2; 
+}
+
+
+#principal{
+    width: 80%;
+    min-height: 100vh;
+    height: auto;
+    
+}
+#principal{
+    background-color: #FFF;
+}
+
+/* 
+    ====================================
+    CONFIGURACIÓN  DE ESTILOS DEL TABLERO
+    ====================================
+*/
+
+/* 
+    -- Estilos del header del tablero --
+*/
+figure.marca img{
+    width: 100%;
+}
+section.info-usuario{
+    display: block;
+    position: relative;
+}
+section.info-usuario figure img{
+    width: 60px;
+    margin-left: 5px;
+    border-radius: 90px;
+    border-color: #fff;
+    border: #fff 2px solid;
+
+    vertical-align: middle;
+}
+section.info-usuario figure figcaption{
+    width: 50px;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    color: #d1d6db;
+     
+}
+/* 
+    -- Estilos del menú de navegación --
+*/
+
+#tablero nav #titulo-navegacion{
+    color: #fff;
+    text-transform: capitalize;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    text-align: center;
+}
+#tablero nav ul{
+    list-style: none;
+    margin-bottom:40px; 
+}
+
+
+#tablero > nav > ul > li{
+    border: #445b72 1px outset;
+}
+
+#tablero > nav >ul >li{
+    border: #445b72 1px outset;
+}
+
+#tablero nav ul li a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+
+/*  Estilos relacionados a submenú*/
+
+/* Configuracion para resaltar submenus*/
+#tablero nav ul ul{
+    margin-left:6px;
+    border-left: #59697a 2px solid;
+}
+/*      icono de submenú*/
+#tablero > nav ul li  a > .ion-chevron-down{
+    font-size: 11px;
+    text-align: center;
+    float:right;
+    border-radius: 90px;
+    transition: transform 0.5s;
+
+}
+#tablero > nav ul > li:hover > a .ion-chevron-down{
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+}
+
+/*      Efectos submenu*/
+
+#tablero nav ul li{
+    max-height: 40px;
+    overflow: hidden;
+    -webkit-transition: max-height 1.5s;
+    transition: max-height 1.5s, border 0.2s;
+}
+#tablero nav ul li:hover{
+    max-height: 400px;
+    background-color: #2e4963;
+    
+}
+
+#tablero nav ul li::after{
+    content: "";
+    width: 0px;
+    display: block;
+    height: 1px;
+    transition: width 2s;
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+    background-color: #fff;
+}
+
+#tablero nav ul li:hover::after{
+    width: 100%;
+}
+
+#tablero footer{
+    min-height: 40px;
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    width: 20%;
+    background-color:#1b2b3b;
+}
+
+
+
+/*
+    Estilos de despliegue
+*/
+
+.nueva-linea{
+    display: block;
+}
+
+/* 
+    ====================================
+    CONFIGURACIÓN  DE ESTILOS DEL ESPACIO PRINCIPAL
+    ====================================
+*/
+
+.cabecera-principal{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background-color: #f7f7f7;
+}
+
+.titulo-cabecera{
+    /*font-family: 'Raleway', cursive;*/
+    font-size: 25px;
+    color: #2b4053;
+    margin: 10px auto;
+    padding: 17px 0;
+}
+
+.caja-informacion{
+    display: inline-block;
+    margin-left: 20px;
+    min-width: 150px;
+    min-height: 80px;
+    border-radius: 5px;
+    border: rgb(84, 196, 168) 1px solid;
+}
+
+.caja-informacion h3{
+    font-size: 30px;
+    font-weight: 100;
+    text-align: center;
+    padding: 10%;
+}
+
+.contenido{
+    padding: 20px;
+}
+
+
+
+
+
+#tablero > nav >ul .activo, #tablero > nav >ul .activo:hover{
+    background-color: rgb(51, 177, 78);
+}
+
+/*
+    ====================================
+    CSS TABLERO RESPONSIVO
+    ====================================
+
+*/
+
+#mostrar-menu{
+    width: 50px;
+    padding: 10px 20px;
+    margin: 10px 0px;
+    background-color: #f7f7f7;
+    font-size: 30px;
+    color:  #304961;
+    /* float: right; */
+    display: none;
+    position: absolute;
+    left:0px;
+    transition: all 0.5s;
+}
+
+#check-mostrar{
+    display: none;
+}
+
+/* 
+    ====================================
+    Footer
+    ====================================
+*/
+
+footer{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+footer span{
+    font-size: 25px;
+    color: #b7c3ce;
+    margin-left: 27%;
+    transition: all 0.2s ease;
+}
+
+footer span:hover{
+    cursor: pointer;
+    color: #d9dde0;
+
+}
+
+
+
+/* 
+    ====================================
+    Media Queries
+    ====================================
+*/
+
+/*
+    Navegacion
+*/
+
+@media screen and (max-width: 1007px){
+    #tablero{
+        height: 100%;
+        position: absolute;
+        left: -40%;        
+        overflow: auto;
+        width: 40%;
+        transition: all 0.5s;
+    }
+    #tablero footer{ width: 40%; transition: all 0.5s}
+    
+    #principal{width: 100%;}
+    #mostrar-menu{display: block;transition: all 0.5s;}
+    #check-mostrar:checked ~#tablero{left: 0%;}
+    #check-mostrar:checked ~#mostrar-menu{left: 40%;}
+}
+
+@media screen and (max-width: 640px) {
+    #tablero{width: 60%; left: -60%}
+    #tablero footer{width: 60%;}
+    #check-mostrar:checked ~#tablero{left: 0%;}
+    #check-mostrar:checked ~#mostrar-menu{left: 60%;}
+
+    
+}
+@media screen and (max-width: 440px) {
+    #tablero{width: 75%; left: -75%}
+    #tablero footer{width: 75%; }
+    #check-mostrar:checked ~#tablero{left: 0%;}
+    #check-mostrar:checked ~#mostrar-menu{left: 75%;}
+    .titulo-cabecera{font-size: 15px;}
+    
+}
+
+
+
+
+

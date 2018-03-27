@@ -1,0 +1,105 @@
+/* 
+    ====================================
+    Estilos de la tabla
+    ====================================
+*/
+
+.tabla-proyectos{
+    width: 90%;
+    margin: 0px auto;
+    margin-bottom: 70px;
+}
+
+#principal .tabla-proyectos,th,td,tr{
+    border-collapse: collapse;
+    padding: 20px 15px;
+    text-align: left;
+    font-size: 16px;
+}
+
+#principal .tabla-proyectos tr{
+    background-color: #fafafa;
+}
+
+#principal .tabla-proyectos th{
+    color: #fff;
+    background: #4e7092;
+    padding: inherit 15px;
+}
+
+#principal .tabla-proyectos .opciones{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+#principal .tabla-proyectos .opciones .ion-eye,.ion-edit,.ion-trash-a{
+    display: block;
+    color: #666c72;
+    font-size: 23px;
+    margin: 15px 5px;
+    transition: all ease 0.2s;
+}
+
+#principal .tabla-proyectos tr:nth-of-type(2n) {
+    background-color: #f1f5f8;
+}
+
+/*      Estilos con pseudoclase hover       */
+#principal .tabla-proyectos .opciones .ion-edit:hover{
+    color: #4e7092;
+    cursor: pointer;
+}
+
+#principal .tabla-proyectos .opciones .ion-eye:hover{
+    color: #5a9c6a;
+    cursor: pointer;
+}
+
+#principal .tabla-proyectos .opciones .ion-trash-a:hover{
+    color: #a54d4d;
+    cursor: pointer;
+}
+
+#principal .tabla-proyectos tr:hover{
+    background: #e7e9f7;
+}
+
+#principal .tabla-proyectos tr:hover{
+    transition: all ease 0.2s;
+}
+
+/*
+    Boton Visualizar
+*/
+
+.visualizar{
+    margin: 15px auto;
+    position: relative;
+    left: 55px;
+}
+
+
+/* 
+    ====================================
+    Media Queries
+    ====================================
+*/
+
+@media screen and (max-width: 900px){
+    .tabla-proyectos{
+        width: 100%;
+        display: block;
+        overflow: scroll;
+    }
+    #principal .tabla-proyectos,th,td,tr{font-size: 14px;}
+    #principal .tabla-proyectos,td,tr{
+        padding: 10px 15px;
+    }
+    #principal .tabla-proyectos .opciones .ion-eye,.ion-edit,.ion-trash-a{
+        font-size: 23px;
+        margin: 70px 3px;
+    }
+}
+
+

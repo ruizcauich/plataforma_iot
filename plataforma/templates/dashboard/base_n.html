@@ -1,0 +1,77 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--<meta http-equiv="refresh" content="2; url=index.html">-->
+    <title>{% block titulo %} Panel de Control {% endblock %}</title>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="static/css/dashboard/vis.min.css">
+    <link rel="stylesheet" href="static/css/botones.css">
+    <link rel="stylesheet" href="static/css/dashboard/style.css">
+    {% block links_templates %}
+    {% endblock %}
+    
+</head>
+<body>
+    <div class="contenedor">
+        <input type="checkbox" name="check-mostrar" id="check-mostrar">
+        <label for="check-mostrar" id='mostrar-menu' class="ion-navicon-round" ></label>
+        <aside id="tablero">
+            <header>
+                <figure class="marca">
+                    <img src="static/img/logo.png" alt="This is the logo">
+                </figure>
+                <section class="info-usuario">
+                    <figure>
+                        <img src="static/img/avatar/usr.jpg" alt="avatar">
+                        <figcaption>
+                            <span class="nueva-linea">¡Bienvenido!</span>
+                            <span class="nueva-linea"><strong>Augusto Ruiz</strong></span>
+                        </figcaption>
+                    </figure>
+                </section>
+            </header>
+            <nav>
+                <h1 id="titulo-navegacion">Menú</h1>
+                <ul>
+                    <li class="activo"><a href="#">Mis proyectos.</a></li>
+                    <li class="submenu"><a href="#">Dispositivos <span class="ion-chevron-down"></span></a>
+                        <ul>
+                            <li><a href="#">subitem</a></li>
+                            <li><a href="#">subitem</a></li>
+                            <li class="submenu"><a href="#">subitem <span class="ion-chevron-down"></span></a>
+                                <ul>
+                                    <li><a href="#">subitem</a></li>
+                                    <li><a href="#">subitem</a></li>
+                                </ul>
+                        </ul>
+                    </li>
+                    <li><a href="#">Sensores</a></li>
+                    <li><a href="#">Reportes</a></li>
+                </ul>
+            </nav>
+            <footer>
+                <span class="ion-log-out"></span>
+                <span class="ion-android-settings"></span>
+            </footer>
+        </aside>
+        <main id="principal">
+            <header class="cabecera-principal">
+                <h1 class="titulo-cabecera">{%block titulo_cabecera %} {% endblock %}</h1>
+            </header>
+
+            {% block contenido %}
+              
+            {% endblock %}
+
+            </div>
+        </main>
+    </div>
+
+    {% block scripts_extra %}
+    {% endblock %}
+</body>
+</html>

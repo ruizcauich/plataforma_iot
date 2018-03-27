@@ -1,0 +1,60 @@
+/*
+    =====================
+    Estilos del Formulario
+    ======================
+*/
+.formulario-proyecto{
+    width: 50%;
+    margin: 30px auto;
+    background: #f7f7f7;
+    padding: 20px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column; /* Safari 6.1+ */
+    flex-direction: column;
+}
+
+/*Estilos de los campos y etiquetas*/
+.formulario-proyecto input[type="text"],textarea, label{
+    width: 80%;
+    margin: 5px auto;
+}
+
+.formulario-proyecto input[type="text"], textarea{
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    color: #858383;
+    font-size: 14px;
+    padding: 12px;
+}
+
+.formulario-proyecto textarea{
+    height: 150px;
+    min-height: 100px;
+    max-height: 200px;
+    resize: none;
+}
+
+.formulario-proyecto input[type="submit"]{
+    width: 30%;
+    min-width: 150px;
+    margin: 12px auto;
+}
+
+
+/*
+    =====================
+    Media Queries
+    ======================
+*/
+
+
+/*
+    Media queries del Formulario
+*/
+
+@media screen and (max-width: 800px){.formulario-proyecto{width: 70%;}}
+@media screen and (max-width: 400px){.formulario-proyecto{width: 90%;}}

@@ -78,7 +78,7 @@
             
 
                 for(var i = 0 ; i < data.length ; i++){
-                    nodesArray[i] = {id: i+1, label: data[i].dispositivos ,group:2};
+                    nodesArray.push({id: i+1, label: data[i].dispositivos ,group:2});
                     contador++;
                 }
 
@@ -137,9 +137,6 @@
                     edges: {
                         width: 3
                     },
-                    groups:{
-                        
-                    }
                 }
 
 

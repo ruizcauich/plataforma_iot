@@ -6,15 +6,10 @@
 
 {% block dashboard_body %}
         <script>
-                
-            $.getJSON("/obtenerCoordenadas", function(datos) {
-                alert("Dato: " + datos["dispositivos"]);
-                $.each(datos["primos"], function(idx,primo) {
-                    alert("Numero primo: " + primo);
-                });
-            });
-    
+               
         </script>
+
+        
         <section class="row bg-blanco">
             <div class="col-sm-10 col-sm-offset-1">
                 <h3 class="section-title">Datos del Proyecto</h3>
@@ -83,60 +78,55 @@
         </div>
 
         
-        <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2RBZqOa_-nqvoGYHLXtsZGNFKyT50a04&callback=initMap">
-        </script>
+        <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2RBZqOa_-nqvoGYHLXtsZGNFKyT50a04&callback=initMap"></script>
+
+
          <script>
 
-            function initMap() {
+            $.getJSON("{{proyecto.id}}/obtenerCoordenadas", function(datos) {
+                initMap(datos);
+            });
+
             
-        
+            function initMap(datos) {
+
+                try{
+                var numeroDispositivos = datos.dispositivos.length;
+
+                var arrayUbicaciones = [];
+
                 var image = {
-                //url: 'https://www.irisbylowes.com/_content/icons/sensors.png',
-                //url: 'ico.png',
-                //ulr:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-                    // This marker is 20 pixels wide by 32 pixels high.
-                    size: new google.maps.Size(32 ,  32),
-                    // The origin for this image is (0, 0).
-                    origin: new google.maps.Point(0, 0),
-                    // The anchor for this image is the base of the flagpole at (0, 32).
+                    size: new google.maps.Size(32,32),
+                    origin: new google.maps.Point(0,0),
                     anchor: new google.maps.Point(16,16)
                 };
-            
-                var peto_lgl = {lat:20.125556,lng: -88.921389};
-                var tekax_gl = { lat:20.201944, lng:-89.288056};
-                    var porpiedades_del_mapa={
-                    zoom:7,
-                    center: peto_lgl
-                };
-                var contenedor_mapa = document.getElementById('map');
-                var map = new google.maps.Map(contenedor_mapa, porpiedades_del_mapa);
-                    var propiedades_marcador = {
-                    position: peto_lgl,
-                    label : "Peto, corona de la luna",
-                    icon:image
-                };
-                var peto_marcador = new google.maps.Marker(propiedades_marcador);
-                peto_marcador.setMap(map);
-                
-                
-                // Marcador para tekax
-                //Propiedades
-                var propiedades_tekax_marcador={
-                    position: tekax_gl,
-                    label: "Tekax",
-                    animation: google.maps.Animation.DROP,
-                    
+
+                for(var i = 0 ; i < numeroDispositivos; i++){
+                    var dispositivo = {
+                        lat: datos["dispositivos"][i][1], 
+                        lng: datos["dispositivos"][i][2],
+                    }
+                    arrayUbicaciones.push([datos["dispositivos"][i][0] , dispositivo]);
                 }
-                var tekax_marcador = new google.maps.Marker(propiedades_tekax_marcador);
-                tekax_marcador.setMap(map);
+                
+                var propiedades_mapa = { zoom: 5, center: arrayUbicaciones[0][1]}
                 
                 
-                //var marker = new google.maps.Marker({
-                    //position: peto_lgl,
-                    //map: map,
-                    //title: 'Hello World!'
-                //});
-            } 
+                var contenedor_mapa = document.getElementById('map');
+
+                var mapa = new google.maps.Map(contenedor_mapa, propiedades_mapa);
+                
+                for(var i = 0; i < numeroDispositivos; i++){
+                    var propiedades_marcador = { position: arrayUbicaciones[i][1], map: mapa, label:arrayUbicaciones[i][0]}
+                    var marcador = new google.maps.Marker(propiedades_marcador)
+                    marcador.setMap(mapa)
+                }
+            }catch(e){
+                console.log(e)
+            }
+
+
+            }
     </script>      
 
 {% endblock %}

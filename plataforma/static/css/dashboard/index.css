@@ -1,0 +1,100 @@
+
+.contenedor-articulos{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    -webkit-flex-direction: row; /* Safari 6.1+ */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    flex-wrap: wrap;
+}
+/*
+    Estilos Generales de los articulos
+*/
+.articulo{
+    width: 23%;
+    background: #f7f7f7;
+    margin-top: 40px;
+    margin-left: 15px;
+}
+
+/*
+    Articulo header
+*/
+.articulo-header{
+    min-height: 120px;
+    background: #f7f7f7;
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.articulo-header .titulo-articulo{
+    color: #2b4053;
+    font-size: 20px
+}
+
+.articulo-header .articulo-descripcion{
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+
+/*
+    Articulo Contenido
+*/
+
+.articulo-contenido{    
+    padding: 0px 5px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column; /* Safari 6.1+ */
+    flex-direction: column;
+}
+
+.articulo-contenido span{
+    text-align: center;
+    font-size: 80px;
+    color: #2b4053;
+}
+
+.articulo-contenido .numero{
+    font-size: 40px;
+}
+
+.articulo-contenido a{
+    width: 70%;
+    margin: 10px auto;
+}
+
+
+/*
+    Media Queries
+*/
+
+@media screen and (max-width:900px){
+    .articulo{
+        width: 40%;
+        margin-left: 50px;
+    }
+}
+
+@media screen and (max-width:600px){
+    .articulo{
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contenedor-articulos:last-child{
+        margin-bottom: 30px;
+    }
+}
+
+
