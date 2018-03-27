@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^dispositivos/$', views.formularioDispositivo, name = 'dispositivos'),
     #dashboard/dispositivos/345
     url(r'^dispositivos/([0-9]+)$', views.detalleDispositivo, name = 'detalle-dispositivo'),
+    #dashboard/dispositivos/345/modificar
+    url(r'^dispositivos/([0-9]+)/modificar$', views.modificarDispositivo, name = 'modificar-dispositivo'),
     #dashboard/configuracion
     url(r'^configuracion/$', views.configuracion, name='configuracion'),
     #dashboard/red-proyecto/
