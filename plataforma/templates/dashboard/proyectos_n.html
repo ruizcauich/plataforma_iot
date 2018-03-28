@@ -1,0 +1,51 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %}Proyectos{% endblock  %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/tabla.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/proyectos.css' %}">
+{% endblock %}
+
+{% block usuario %}
+{{usuario}}
+{% endblock %}
+
+
+{%block titulo_cabecera %} Proyectos {% endblock %}
+
+{% block contenido %}
+
+
+{% if proyectos %}
+<table class="tabla">
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Dispositivos</th>
+        <th>Sensores</th>
+        <th>Opciones</th>
+    </tr>
+    {% for proyecto in proyectos %}
+    <tr>
+        <td>{{proyecto.nombre_de_proyecto}}</td>
+        <td>{{proyecto.descripcion | truncatewords:10}}</td>
+        <td>{{proyecto.dispositivo_set.count}}</td>
+        <td>{{numero_sensores}}</td>
+        <td class="opciones"><a href=""><span class="ion-eye"></span></a></td>
+        <td class="opciones"><a href=""><span class="ion-trash-a"></a></span></td>
+    </tr>
+    {% endfor %}
+
+</table>  
+{% else %}
+    <h2>Aun no cuentas con Proyectos..</h2>
+    <input class="boton boton-informacion" type="button" value="Nuevo Proyecto">
+{% endif %}
+
+
+
+
+  
+{% endblock %}

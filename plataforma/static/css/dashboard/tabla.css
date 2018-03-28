@@ -1,0 +1,108 @@
+
+.tabla{
+    width: 95%;
+    margin: 50px auto;
+    margin-bottom: 70px;
+}
+
+.tabla,th,td,tr{
+    border-collapse: collapse;
+    padding: 20px 15px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.tabla tr td.centrado{
+    text-align: center; /* center checkbox horizontally */
+    vertical-align: middle; /* center checkbox vertically */
+}
+
+.tabla tr{
+    background-color: #fafafa;
+}
+
+.tabla th{
+    color: #fff;
+    background: #4e7092;
+    padding: inherit 15px;
+}
+
+.tabla .opciones{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+.tabla .opciones .ion-eye,.ion-trash-a{
+    display: block;
+    color: #666c72;
+    font-size: 23px;
+    margin: 15px 10px;
+    transition: all ease 0.2s;
+}
+
+.tabla .opciones .ion-eye{
+    margin-left: 20px;
+}
+
+
+.tabla tr:nth-of-type(2n) {
+    background-color: #f1f5f8;
+}
+
+/*      Estilos con pseudoclase hover       */
+.tabla .opciones .ion-edit:hover{
+    color: #4e7092;
+    cursor: pointer;
+}
+
+.tabla .opciones .ion-eye:hover{
+    color: #5a9c6a;
+    cursor: pointer;
+}
+
+.tabla .opciones .ion-trash-a:hover{
+    color: #a54d4d;
+    cursor: pointer;
+}
+
+.tabla tr:hover{
+    background: #e7e9f7;
+}
+
+.tabla tr:hover{
+    transition: all ease 0.2s;
+}
+
+/*
+    Boton Visualizar
+*/
+
+.visualizar{
+    margin: 15px auto;
+    position: relative;
+    left: 55px;
+}
+
+
+/* 
+    ====================================
+    Media Queries
+    ====================================
+*/
+
+@media screen and (max-width: 900px){
+    .tabla{
+        width: 100%;
+        display: block;
+        overflow: scroll;
+    }
+    .tabla,th,td,tr{font-size: 14px;}
+    .tabla,td,tr{
+        padding: 10px 15px;
+    }
+    .tabla .opciones .ion-eye,.ion-edit,.ion-trash-a{
+        font-size: 23px;
+        margin: 70px 3px;
+    }
+}
