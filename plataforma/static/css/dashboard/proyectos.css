@@ -3,9 +3,7 @@ h2{
     text-align: center;
     margin-top: 50px;
 }
-
-input[type="button"]{
-    display: block;
-    width: 200px;
-    margin: 25px auto;
+.centrado{
+    margin: 25px 0;
+    text-align: center;
 }

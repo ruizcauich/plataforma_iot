@@ -11,7 +11,7 @@ html, body{ padding: 0px; margin: 0px;}
     height: 100vh;
     background-color: #3838388f;
     overflow: auto;
-    z-index: 1;
+    z-index: 1000;
    
 }
 .modal::before{
@@ -69,12 +69,13 @@ html, body{ padding: 0px; margin: 0px;}
     color: #FFF;
 }
 
-.modal.exito .encabezado-modal{
-    background-color: greenyellow;
-    color: #FFF;
+.modal.informacion .encabezado-modal,
+.modal.advertencia .encabezado-modal,
+.modal.exito .encabezado-modal,
+.modal.peligro .encabezado-modal{
+    color:#fff;
 }
-
-.modal.advertencia .encabezado-modal{
-    background-color: orange;
-    color: #FFF;
-}
+.modal.informacion .encabezado-modal{background-color: rgb(84, 202, 231);}
+.modal.exito .encabezado-modal{background-color: #4CAF50;}
+.modal.advertencia .encabezado-modal{ background-color: #ff9800;}
+.modal.peligro .encabezado-modal{ background-color: #f44336;}
