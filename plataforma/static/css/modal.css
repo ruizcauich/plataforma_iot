@@ -1,0 +1,80 @@
+html, body{ padding: 0px; margin: 0px;}
+*{
+    box-sizing: border-box;
+}
+.modal{
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    background-color: #3838388f;
+    overflow: auto;
+    z-index: 1;
+   
+}
+.modal::before{
+    display: block;
+    content:"×";
+    float: right;
+    font-size: 30px;
+    color: #c7c7c7; 
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px;
+}
+
+/*ELELEMNTOS QUE EMPIEZAN CON dialogo-modal*/
+.modal [class^="dialogo-modal"]{
+    --modal-top:50px;
+    position: relative;
+    background-color: #f8f8f8;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom:20px; 
+    top: var(--modal-top);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: deslizar-abajo;
+    -webkit-animation-duration: 0.4s;
+    animation-name: deslizar-abajo;
+    animation-duration: 0.4s
+}
+.modal [class*="-reducido"]{
+    width: 30%;
+}
+
+.encabezado-modal, .cuerpo-modal, .pie-modal{
+    padding:5px 20px; margin:0px;
+}
+.encabezado-modal{ border-bottom: #ccc 1px solid}
+.pie-modal{ border-top: #ccc 1px solid}
+
+/* ANIMACIÓN DEL MODAL */
+
+@-webkit-keyframes deslizar-abajo {
+    from {top:-300px; opacity:0} 
+    to {top:var(--modal-top); opacity:1}
+}
+
+@keyframes deslizar-abajo {
+    from {top:-300px; opacity:0}
+    to {top:var(--modal-top); opacity:1}
+}
+
+.modal.advertencia .encabezado-modal{
+    background-color: orange;
+    color: #FFF;
+}
+
+.modal.exito .encabezado-modal{
+    background-color: greenyellow;
+    color: #FFF;
+}
+
+.modal.advertencia .encabezado-modal{
+    background-color: orange;
+    color: #FFF;
+}
