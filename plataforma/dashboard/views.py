@@ -69,6 +69,16 @@ def modificarProyecto(request, id):
         form.save()
         return redirect( 'dashboard:detalle-proyecto',proyecto.id)
 
+# VISTA ENCARGADA DE ELIMINAR UN PROYECTO
+@login_required(login_url = 'cuentas:login')
+def eliminarProyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, pk=id)
+    try:
+        proyecto.delete()
+        return HttpResponse("Proyecto " + str(id) + " eliminado exitosamente")
+    except:
+        pass
+    return HttpResponse("Proyecto " + str(id) + " NO eliminado exitosamente")
 
 @login_required(login_url = 'cuentas:login')
 def detalleProyecto(request, id_proyecto):
@@ -123,6 +133,16 @@ def modificarDispositivo(request, id):
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect( 'dashboard:detalle-dispositivo',dispositivo.id)
+
+@login_required(login_url = 'cuentas:login')
+def eliminarDispositivo(request, id):
+    dispositivo = get_object_or_404(Dispositivo, pk=id)
+    try:
+        dispositivo.delete()
+        return HttpResponse("Dispositivo " + str(id) + " eliminado exitosamente ")
+    except:
+        pass
+    return HttpResponse("Dispositivo " + str(id) + " no eliminado " )
 
 
 @login_required(login_url = 'cuentas:login')
