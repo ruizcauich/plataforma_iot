@@ -6,6 +6,7 @@
 {% block links_templates %}
 <link rel="stylesheet" href="{% static '/css/dashboard/tabla.css' %}">
 <link rel="stylesheet" href="{% static '/css/dashboard/proyectos.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/formulario.css' %}">
 <link rel="stylesheet" href="{% static '/css/modal.css' %}">
 {% endblock %}
 
@@ -18,6 +19,24 @@
 
 {% block contenido %}
 
+
+<div id="modal-proyecto" class="modal">
+    <div class="dialogo-modal">
+        <div class="encabezado-modal">
+            <h2 class="margen">Nuevo Proyecto</h2>
+        </div>
+        <div class="cuerpo-modal">
+            <form action="" class="formulario" method="post">
+                {% csrf_token %}
+                {% include "dashboard/form_template.html" %}
+                <div class="pie-modal">
+                    <input class="boton boton-exito" type="submit" value="Crear">
+                    <input class="boton boton-advertencia" data-trigger="cerrar-modal" data-target="modal-proyecto" type="button" value="Cancelar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% if proyectos %}
 <table class="tabla">
@@ -39,27 +58,18 @@
     </tr>
     {% endfor %}
 
-</table>  
+</table> 
+
+<div class="centrado">
+    <input data-trigger="abrir-modal" data-target="modal-proyecto" class="boton boton-informacion" type="button" value="Nuevo Proyecto">
+</div>
+
 {% else %}
     <h2>Aun no cuentas con Proyectos..</h2>
     <div class="centrado">
         <input data-trigger="abrir-modal" data-target="modal-proyecto" class="boton boton-informacion" type="button" value="Nuevo Proyecto">
     </div>
     
-    <div id="modal-proyecto" class="modal">
-        <div class="dialogo-modal">
-            <div class="encabezado-modal">
-                Nuevo Proyecto
-            </div>
-            <div class="cuerpo-modal">
-                Formulario
-            </div>
-            <div class="pie-modal">
-                <input class="boton boton-exito" type="button" value="Crear">
-                <input class="boton boton-advertencia" data-trigger="cerrar-modal" data-target="modal-proyecto" type="button" value="Cancelar">
-            </div>
-        </div>
-    </div>
 {% endif %}
 
 {% block scripts_extra %}
