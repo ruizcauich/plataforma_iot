@@ -1,0 +1,107 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %} {{proyecto.nombre_de_proyecto}} {% endblock  %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/tabla.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/formulario.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/ver_proyecto.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/vis.min.css' %}">
+<link rel="stylesheet" href="{% static '/css/modal.css' %}">
+{% endblock %}
+
+{% block usuario %}
+{{usuario}}
+{% endblock %}
+
+
+{% block titulo_cabecera %}
+{{proyecto.nombre_de_proyecto}}
+{% endblock %}
+
+
+
+
+{% block contenido %}
+
+<div id="modal-dispositivo" class="modal">
+    <div class="dialogo-modal">
+        <div class="encabezado-modal">
+            <h2 class="margen">Nuevo Dispositivo</h2>
+        </div>
+        <div class="cuerpo-modal">
+            <form action="" class="formulario" method="post">
+                {% csrf_token %}
+                {% include "dashboard/form_template.html" %}
+                <div class="pie-modal">
+                    <input class="boton boton-exito" type="submit" value="Crear">
+                    <input class="boton boton-advertencia" data-trigger="cerrar-modal" data-target="modal-dispositivo" type="button" value="Cancelar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor-main">
+    <form action="" class="formulario izquierda">
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="" id="nombre" placeholder="" value="{{proyecto.nombre_de_proyecto}}">
+        <label for="descripcion">Descripción: </label>
+        <textarea name="" id="descripcion" cols="30" rows="10">{{proyecto.descripcion}}</textarea>
+        <input type="submit" value="Guardar Cambios" class="boton boton-informacion">
+    </form>
+
+    <div id="red"></div>
+
+
+    {% if dispositivos %}
+    <table class="tabla">
+        <tr>
+            <th>Nombre</th>
+            <th>Sensores</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Habilitado</th>
+            <th>Opciones</th>
+        </tr>
+        {% for dispositivo in dispositivos%}
+            <tr>
+                <td>{{dispositivo.nombre_de_dispositivo}}</td>
+                <td>{{dispositivo.sensor_set.count}}</td>
+                <td>{{dispositivo.tipo}}</td>
+                <td>{{dispositivo.descripcion | truncatewords:10}}</td>
+                <td class="centrado"><input type="checkbox" name="" id=""></td>
+                <td class="opciones"><a href=""><span class="ion-eye"></span></a></td>
+                <td class="opciones"><a href=""><span class="ion-trash-a"></a></span></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    </div>
+    <div class="centrado">
+            <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
+    </div>
+    {% else %}
+    </div>
+        <h2 class="margen">{{proyecto.nombre_de_proyecto}} aun no cuenta con Dispositivos..</h2>
+        <div class="centrado">
+            <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
+        </div>
+    {% endif %}
+
+
+
+{% block scripts_extra %}
+<script src="{% static '/js/arlibreria.js' %}"></script>
+<script src="{% static '/js/modal.js' %}"></script>
+<script src="{% static '/js/vis.min.js' %}"></script>
+<script src="{% static '/js/ajax.js' %}"></script>
+<script src="{% static '/js/grafoRed.js' %}"></script>
+<script>
+    window.onload=ajax(Number("{{proyecto.id}}"),"{{proyecto.nombre_de_proyecto}}")
+</script>
+
+{% endblock %}
+
+{% endblock %}

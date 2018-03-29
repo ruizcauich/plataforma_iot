@@ -24,5 +24,5 @@ urlpatterns = [
     #dashboard/configuracion
     url(r'^configuracion/$', views.configuracion, name='configuracion'),
     #dashboard/red-proyecto/
-    url(r'^red-proyecto/$', views.redProyecto, name='red-proyecto'),
+    url(r'^red-proyecto/([0-9]+)$', views.redProyecto, name='red-proyecto'),
 ]

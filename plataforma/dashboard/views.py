@@ -4,6 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 #IMPORTS PLATAFORMA
 from .models import Proyecto, Dispositivo, Sensor
 from .forms import FormProyecto,FormDispositivo
@@ -95,14 +96,20 @@ def eliminarProyecto(request, id):
 @login_required(login_url = 'cuentas:login')
 def detalleProyecto(request, id_proyecto):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+    dispositivos = proyecto.dispositivo_set.all()
+
     form = FormProyecto(instance=proyecto)
     formDisp = FormDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'])
+
+    usuario = User.objects.get(username=request.user)
     context= {
-        'form':form,
-        'formDisp': formDisp,
-        'proyecto': proyecto
+        'form_modificar':form,
+        'form': formDisp,
+        'proyecto': proyecto,
+        'dispositivos': dispositivos,
+        'usuario': usuario
     }
-    return render(request, 'dashboard/detalle-proyecto.html', context)
+    return render(request, 'dashboard/detalle-proyecto_n.html', context)
 
 
 # ==================
@@ -190,9 +197,8 @@ def configuracion(request):
 
 
 @login_required(login_url = 'cuentas:login')
-def redProyecto(request):
-
-    id_proyecto = request.GET['id']
+@csrf_exempt
+def redProyecto(request,id_proyecto):
 
     proyecto = Proyecto.objects.get(pk = id_proyecto)
     dispositivos = Dispositivo.objects.filter(proyecto=proyecto)

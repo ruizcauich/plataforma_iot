@@ -17,13 +17,24 @@
     flex-direction: column;
 }
 
+.izquierda{
+    margin-bottom: 100px;
+    margin-left: 20px;
+    width: 44%;
+}
+
 /*Estilos de los campos y etiquetas*/
-.formulario input[type="text"],textarea, label{
+.formulario input[type="text"],
+.formulario textarea,
+.formulario label,
+.formulario input[type="number"]{
     width: 80%;
     margin: 5px auto;
 }
 
-.formulario input[type="text"], textarea{
+.formulario input[type="text"],
+.formulario textarea,
+.formulario input[type="number"]{
     border: 1px solid #ccc;
     border-radius: 2px;
     color: #858383;
@@ -36,7 +47,7 @@
     min-height: 100px;
     max-height: 200px;
     resize: none;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .formulario input[type="submit"]{
@@ -44,7 +55,6 @@
     min-width: 150px;
     margin: 12px auto;
 }
-
 
 /*
     =====================
@@ -57,5 +67,5 @@
     Media queries del Formulario
 */
 
-@media screen and (max-width: 800px){.formulario{width: 70%;}}
-@media screen and (max-width: 400px){.formulario{width: 90%;}}
+@media screen and (max-width: 800px){.formulario{width: 90% ; margin-bottom: 50px;}}
+@media screen and (max-width: 400px){.formulario{width: 95% ; margin-bottom: 50px;}}
