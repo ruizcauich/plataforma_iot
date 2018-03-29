@@ -34,10 +34,17 @@ LIBRERIA.Modal = function(id, padre){
             document.body.appendChild(this.elemento);
         }
 
-        initModales();
+        
 
 
     }
+    else{
+        this.dialogo = this.elemento.children[0];
+        this.encabezado = this.dialogo.querySelector("[class=encabezado-modal]")
+        this.pie = this.dialogo.querySelector("[class=pie-modal]")
+        this.cuerpo = this.dialogo.querySelector("[class=cuerpo-modal]")
+    }
+    initModales();
 
     this.abrir=function(padre){
         this.elemento.style.display="block";            
@@ -45,6 +52,14 @@ LIBRERIA.Modal = function(id, padre){
     this.cerrar=function(){
         this.elemento.style.display="none";
     }
+    
+    this.reducido = ()=>{this.dialogo.setAttribute("class", "dialogo-modal-reducido");}
+    this.grande =   ()=>{this.dialogo.setAttribute("class", "dialogo-modal");}
+    this.peligro = ()=>{this.elemento.classList.add("peligro")}
+    this.exito = ()=>{this.elemento.classList.add("exito")}
+    this.informacion = ()=>{this.elemento.classList.add("informacion")}
+    this.advertencia = ()=>{this.elemento.classList.add("advertencia")}
+    
 }
 
 function initModales(){
