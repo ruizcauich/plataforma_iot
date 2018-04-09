@@ -1,0 +1,96 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %} {{dispositivo.nombre_de_dispositivo}} {% endblock %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/tabla.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/formulario.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/ver_dispositivo.css' %}">
+<link rel="stylesheet" href="{% static '/css/modal.css' %}">
+{% endblock %}
+
+{% block usuario %} usuario {% endblock %}
+
+
+{% block titulo_cabecera %}
+{{dispositivo.nombre_de_dispositivo}}
+{% endblock %}
+
+
+{% block contenido %}
+
+<div id="modal-sensor" class="modal">
+    <div class="dialogo-modal">
+        <div class="encabezado-modal">
+            <h2 class="margen">Nuevo Sensor</h2>
+        </div>
+        <div class="cuerpo-modal">
+            <form action="" class="formulario" method="post">
+                {% csrf_token %}
+                {% with formulario_sensor as form %}
+                    {% include "dashboard/form_template.html" %}  
+                {% endwith %}
+                <div class="pie-modal">
+                    <input class="boton boton-exito" type="submit" value="Crear">
+                    <input class="boton boton-advertencia" data-trigger="cerrar-modal" data-target="modal-dispositivo" type="button" value="Cancelar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+<div class="contenedor-main">
+    <form action="{% url 'dashboard:modificar-dispositivo' dispositivo.id %}" class="formulario izquierda" method="POST">
+        {% csrf_token %}
+        {% include "dashboard/form_template.html" %}
+        <input type="submit" value="Guardar Cambios" class="boton boton-informacion">
+    </form>
+
+    <div class="contenedor-sensores">
+        {% if sensores %}
+            <table class="tabla">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Habilitado</th>
+                    <th>Opciones</th>
+                </tr>
+        
+                {% for sensor in sensores %}
+                    <tr>
+                        <td>{{sensor.nombre_de_sensor}}</td>
+                        <td>{{sensor.tipo}}</td>
+                        {% if sensor.esta_habilitado %}
+                            <td class="centrado"><input type="checkbox" name="habilitado" id="" checked disabled></td>  
+                        {% else %}
+                            <td class="centrado"><input type="checkbox" name="habilitado" id="" disabled></td>
+                        {% endif %}
+                        <td class="opciones"><a href=""><span class="ion-trash-a"></a></span></td>
+                    </tr>
+                {% endfor %}
+        
+            </table>
+
+            <div class="centrado">
+                <input data-trigger="abrir-modal" data-target="modal-sensor" class="boton boton-informacion" type="button" value="Nuevo Sensor">
+            </div>
+        {% else %}
+            <h2 class="margen">{{dispositivo.nombre_de_dispositivo}} aun no cuenta con Sensores..</h2> 
+            <div class="centrado">
+                <input data-trigger="abrir-modal" data-target="modal-sensor" class="boton boton-informacion" type="button" value="Nuevo Sensor">
+            </div>
+        {% endif %}
+    </div>
+
+
+    
+</div>
+
+{% endblock %}
+
+
+{% block scripts_extra %}
+<script src="{% static '/js/arlibreria.js' %}"></script>
+<script src="{% static '/js/modal.js' %}"></script>
+{% endblock %}

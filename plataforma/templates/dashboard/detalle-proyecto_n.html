@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static '/css/dashboard/vis.min.css' %}">
 <link rel="stylesheet" href="{% static '/css/modal.css' %}">
 {% endblock %}
-
+ 
 {% block usuario %}
 {{usuario}}
 {% endblock %}
@@ -31,7 +31,7 @@
             <h2 class="margen">Nuevo Dispositivo</h2>
         </div>
         <div class="cuerpo-modal">
-            <form action="" class="formulario" method="post">
+            <form action="{% url 'dashboard:crear-dispositivo' %}" class="formulario" method="post">
                 {% csrf_token %}
                 {% include "dashboard/form_template.html" %}
                 <div class="pie-modal">
@@ -44,11 +44,12 @@
 </div>
 
 <div class="contenedor-main">
-    <form action="" class="formulario izquierda">
+    <form action="{% url 'dashboard:modificar-proyecto' proyecto.id %}" class="formulario izquierda" method="POST">
+        {% csrf_token %}
         <label for="nombre">Nombre: </label>
-        <input type="text" name="" id="nombre" placeholder="" value="{{proyecto.nombre_de_proyecto}}">
+        {{form_modificar.nombre_de_proyecto}}
         <label for="descripcion">Descripción: </label>
-        <textarea name="" id="descripcion" cols="30" rows="10">{{proyecto.descripcion}}</textarea>
+        {{form_modificar.descripcion}}
         <input type="submit" value="Guardar Cambios" class="boton boton-informacion">
     </form>
 
@@ -71,8 +72,12 @@
                 <td>{{dispositivo.sensor_set.count}}</td>
                 <td>{{dispositivo.tipo}}</td>
                 <td>{{dispositivo.descripcion | truncatewords:10}}</td>
-                <td class="centrado"><input type="checkbox" name="" id=""></td>
-                <td class="opciones"><a href=""><span class="ion-eye"></span></a></td>
+                {% if dispositivo.esta_habilitado %}
+                    <td class="centrado"><input type="checkbox" name="habilitado" id="" checked disabled></td>  
+                {% else %}
+                    <td class="centrado"><input type="checkbox" name="habilitado" id="" disabled></td>
+                {% endif %}
+                <td class="opciones"><a href="{% url 'dashboard:detalle-dispositivo' dispositivo.id %}"><span class="ion-eye"></span></a></td>
                 <td class="opciones"><a href=""><span class="ion-trash-a"></a></span></td>
             </tr>
         {% endfor %}
@@ -80,7 +85,7 @@
 
     </div>
     <div class="centrado">
-            <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
+        <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
     </div>
     {% else %}
     </div>
@@ -91,6 +96,7 @@
     {% endif %}
 
 
+{% endblock %}
 
 {% block scripts_extra %}
 <script src="{% static '/js/arlibreria.js' %}"></script>
@@ -104,4 +110,3 @@
 
 {% endblock %}
 
-{% endblock %}

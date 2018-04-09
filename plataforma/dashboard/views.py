@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 #IMPORTS PLATAFORMA
 from .models import Proyecto, Dispositivo, Sensor
-from .forms import FormProyecto,FormDispositivo
+from .forms import FormProyecto,FormDispositivo,FormSensor,FormCampo
 import json
 
 
@@ -80,7 +80,9 @@ def modificarProyecto(request, id):
 
     if request.method == 'POST' and form.is_valid():
         form.save()
-        return redirect( 'dashboard:detalle-proyecto',proyecto.id)
+    
+    return redirect( 'dashboard:detalle-proyecto',proyecto.id)
+
 
 # VISTA ENCARGADA DE ELIMINAR UN PROYECTO
 @login_required(login_url = 'cuentas:login')
@@ -102,27 +104,28 @@ def detalleProyecto(request, id_proyecto):
     formDisp = FormDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'])
 
     usuario = User.objects.get(username=request.user)
-    context= {
+    contexto= {
         'form_modificar':form,
         'form': formDisp,
         'proyecto': proyecto,
         'dispositivos': dispositivos,
         'usuario': usuario
     }
-    return render(request, 'dashboard/detalle-proyecto_n.html', context)
+    return render(request, 'dashboard/detalle-proyecto_n.html', contexto)
 
 
 # ==================
 #   VISTAS CORRESPONDIENTES A DISPOSITIVOS
 # ==================
-# VISTA PARA CREAR UN DISPOSITIVO
+# VISTA QUE ENLISTA TODOS LOS DISPOSITIVOS
 @login_required(login_url = 'cuentas:login')
 def formularioDispositivo(request):
 
     form = FormDispositivo(request.POST or None)
+    usuario = User.objects.get(username=request.user)
 
     if form.is_valid():
-        proyecto = form.save()
+        dispositivo = form.save()
         form = FormDispositivo()
 
     #Obtenemos todos los proyectos, enseguida los dispositios pertenecientes a estos
@@ -131,12 +134,47 @@ def formularioDispositivo(request):
     for pro in proyectos:
         dispositivos += pro.dispositivo_set.all()
     
-    context = {
+    contexto = {
         'form': form,
         'dispositivos':dispositivos,
+        'usuario': usuario,
     }
 
-    return render(request,'dashboard/dispositivos.html',context)
+    return render(request,'dashboard/dispositivos_n.html',contexto)
+
+# VISTA PARA CREAR UN DISPOSITIVO
+@login_required(login_url = 'cuentas:login')
+def crearDispositivo(request):
+
+    form = FormDispositivo(request.POST or None)
+
+    if form.is_valid():
+        dispositivo = form.save()
+        
+    return redirect( 'dashboard:detalle-dispositivo',dispositivo.id)
+
+@login_required(login_url = 'cuentas:login')
+def detalleDispositivo(request, id_dispositivo):
+
+    dispositivo = get_object_or_404(Dispositivo,id=id_dispositivo)
+
+    lista_sensores = []
+    lista_sensores = dispositivo.sensor_set.all()
+
+    formulario_dispositivo = FormDispositivo(instance=dispositivo)
+    formulario_sensor = FormSensor(request.POST or None)
+
+    contexto = {
+        'dispositivo': dispositivo,
+        'sensores': lista_sensores,
+        'form': formulario_dispositivo,
+        'formulario_sensor': formulario_sensor,
+    }
+
+    return render(request, 'dashboard/detalle-dispositivo_n.html', contexto)
+
+
+
 
 
 # VISTA PARA LA MODIFICACIÓN DE DATOS DE ALGÚN DISPOSITIVO
@@ -163,10 +201,6 @@ def eliminarDispositivo(request, id):
         pass
     return HttpResponse("Dispositivo " + str(id) + " no eliminado " )
 
-
-@login_required(login_url = 'cuentas:login')
-def detalleDispositivo(request, id_dispositivo):
-    return HttpResponse(id_dispositivo)
 
 def obtenerCoordenadas(request, id_proyecto):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)

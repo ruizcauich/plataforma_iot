@@ -1,0 +1,69 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %}Dispositivos{% endblock  %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/tabla.css' %}">
+{% endblock %}
+
+{% block usuario %}
+{{usuario}}
+{% endblock %}
+
+
+{%block titulo_cabecera %} Dispositivos {% endblock %}
+
+{% block contenido %}
+
+{% if dispositivos %}
+<table class="tabla">
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Sensores</th>
+        <th>Tipo</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Habilitado</th>
+        <th>Opciones</th>
+    </tr>
+    {% for dispositivo in dispositivos %}
+    <tr>
+        <td>{{dispositivo.nombre_de_dispositivo}}</td>
+        <td>{{dispositivo.descripcion | truncatewords:7}}</td>
+        <td>{{dispositivo.sensor_set.count}}</td>
+        <td>{{dispositivo.tipo}}</td>
+        <td>{{dispositivo.latitud}}</td>
+        <td>{{dispositivo.longitud}}</td>
+        {% if dispositivo.esta_habilitado %}
+            <td class="centrado"><input type="checkbox" name="habilitado" id="" checked disabled></td>  
+        {% else %}
+            <td class="centrado"><input type="checkbox" name="habilitado" id="" disabled></td>
+        {% endif %}
+        <td class="opciones"><a href=""><span class="ion-eye"></span></a></td>
+        <td class="opciones">
+            <a onclick="" data-target="">
+                <span class="ion-trash-a"></span>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table> 
+{% else %}
+    <h2 class="margen">Aun no cuentas con Dispositivos..</h2>
+    <div class="centrado">
+        <input data-trigger="abrir-modal" data-target="modal-proyecto" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
+    </div>
+    
+{% endif %}
+
+{% endblock %}
+
+
+{% block scripts_extra %}
+  
+{% endblock %}
+
+

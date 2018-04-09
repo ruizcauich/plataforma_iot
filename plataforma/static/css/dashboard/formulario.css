@@ -7,7 +7,7 @@
     width: 50%;
     margin: 20px auto;
     background: #f7f7f7;
-    padding: 20px;
+    padding: 20px 10px;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -15,6 +15,7 @@
     display: flex;
     -webkit-flex-direction: column; /* Safari 6.1+ */
     flex-direction: column;
+    color: #5a5a5a;
 }
 
 .izquierda{
@@ -23,24 +24,35 @@
     width: 44%;
 }
 
+.grande{
+    width: 75%;
+}
+
 /*Estilos de los campos y etiquetas*/
 .formulario input[type="text"],
 .formulario textarea,
 .formulario label,
-.formulario input[type="number"]{
+.formulario input[type="number"],
+select{
     width: 80%;
-    margin: 5px auto;
+    margin: 10px auto;
 }
 
 .formulario input[type="text"],
 .formulario textarea,
-.formulario input[type="number"]{
+.formulario input[type="number"],
+select{
     border: 1px solid #ccc;
     border-radius: 2px;
     color: #858383;
     font-size: 14px;
     padding: 12px;
 }
+
+/*
+    Estilo input tipo checkbox
+*/
+
 
 .formulario textarea{
     height: 150px;
@@ -56,6 +68,7 @@
     margin: 12px auto;
 }
 
+
 /*
     =====================
     Media Queries
@@ -67,5 +80,8 @@
     Media queries del Formulario
 */
 
-@media screen and (max-width: 800px){.formulario{width: 90% ; margin-bottom: 50px;}}
+@media screen and (max-width: 800px){
+    .formulario{width: 90% ; margin-bottom: 50px;}
+    .izquierda{margin: 20px auto;}
+}
 @media screen and (max-width: 400px){.formulario{width: 95% ; margin-bottom: 50px;}}

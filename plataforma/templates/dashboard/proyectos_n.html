@@ -52,7 +52,7 @@
         <td>{{proyecto.descripcion | truncatewords:10}}</td>
         <td>{{proyecto.dispositivo_set.count}}</td>
         <td>{{numero_sensores}}</td>
-        <td class="opciones"><a href=""><span class="ion-eye"></span></a></td>
+        <td class="opciones"><a href="{%url 'dashboard:detalle-proyecto' proyecto.id%}"><span class="ion-eye"></span></a></td>
         <td class="opciones">
             <a onclick="eliminarRegistro(this)" data-target="{{proyecto.id}}">
                 <span class="ion-trash-a"></span></a></td>
@@ -86,6 +86,8 @@
     </div>
     
 {% endif %}
+
+{% endblock %}
 
 {% block scripts_extra %}
 <script src="{% static '/js/arlibreria.js' %}"></script>
@@ -125,8 +127,4 @@
         avisoE.cerrar();
     }
 </script>
-{% endblock %}
-
-
-  
 {% endblock %}

@@ -1,7 +1,7 @@
 
 .tabla{
     width: 95%;
-    margin: 50px auto;
+    margin: 20px auto;
     margin-bottom: 70px;
 }
 
@@ -30,7 +30,8 @@
 .tabla .opciones{
     display: inline-block;
     padding: 0px;
-    margin: 0px;
+    margin: 5px 0;
+    text-align: center;
 }
 
 .tabla .opciones .ion-eye,.ion-trash-a{
@@ -70,9 +71,11 @@
     background: #e7e9f7;
 }
 
+
 .tabla tr:hover{
     transition: all ease 0.2s;
 }
+
 
 /*
     Boton Visualizar
@@ -103,8 +106,7 @@ div.centrado{
 
 @media screen and (max-width: 900px){
     .tabla{
-        width: 100%;
-        display: block;
+        width: 90%;
         overflow: scroll;
     }
     .tabla,th,td,tr{font-size: 14px;}
@@ -113,6 +115,14 @@ div.centrado{
     }
     .tabla .opciones .ion-eye,.ion-edit,.ion-trash-a{
         font-size: 23px;
-        margin: 70px 3px;
+        margin: 0px 3px;
+    }
+}
+
+
+@media screen and (max-width: 400px){
+    .tabla{
+        width: 100%;
+        display: block;
     }
 }
