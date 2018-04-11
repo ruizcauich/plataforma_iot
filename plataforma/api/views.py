@@ -31,7 +31,7 @@ def guardar_json(request):
     '''
     #Se tiene que determinar si se recibe algún json
     try:
-        json_recibido = json.loads(request.body)
+        json_recibido = json.loads(request.body.decode('utf-8'))
     except:
         return HttpResponse("Su estructura json no esta bien formada")
     
@@ -119,7 +119,6 @@ def guardar_datos(request):
         
         #Dividimos por parejas campo y valor
         for k,v in diccionario_peticion.items():
-            cadena+= ' ' + k + ' ' + v  + ' // '
             
             campo = Campo.objects.get( nombre_de_campo = k )
             valor = Valor(campo = campo, valor = v)
