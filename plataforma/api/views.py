@@ -119,6 +119,7 @@ def guardar_datos(request):
         
         #Dividimos por parejas campo y valor
         for k,v in diccionario_peticion.items():
+            cadena+= ' ' + k + ' ' + v  + ' // '
             
             campo = Campo.objects.get( nombre_de_campo = k )
             valor = Valor(campo = campo, valor = v)
