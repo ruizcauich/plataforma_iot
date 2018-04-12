@@ -12,6 +12,28 @@
     justify-content: space-between;
 }
 
+.contenedor-form{
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor-form .items{
+    width: 35%;
+    background: #ededf1;
+    border-radius: 5px;
+    overflow: scroll;
+}
+
+.contenedor-form form{
+    width: 65%;
+    margin: 0px auto !important;
+}
+
+.contenedor-form form #agregarSensor{
+    width: 180px;
+    margin: 35px auto;
+}
+
 .contenedor-sensores{
     width: 50%;
     margin: 0px auto;

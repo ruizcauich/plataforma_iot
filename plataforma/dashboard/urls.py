@@ -23,6 +23,10 @@ urlpatterns = [
     #dashboard/dispositivos/345/modificar
     url(r'^dispositivos/([0-9]+)/modificar$', views.modificarDispositivo, name = 'modificar-dispositivo'),
     url(r'^dispositivos/([0-9]+)/eliminar$', views.eliminarDispositivo, name = 'aliminar-dispositivo'),
+    #dashboard/sensores/crear
+    url(r'^sensores/formulario/([0-9]+)$', views.formularioSensor, name='form-sensor'),
+    #dashboard/sensores/crear/4
+    url(r'sensores/crear/([0-9]+)$', views.crearSensor, name="crear-sensor"),
     #dashboard/configuracion
     url(r'^configuracion/$', views.configuracion, name='configuracion'),
     #dashboard/red-proyecto/

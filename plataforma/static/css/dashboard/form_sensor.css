@@ -1,0 +1,52 @@
+.contenedor-form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.formulario{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: #f7f7f7 !important;
+}
+
+hr{
+    border: 0; 
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #d9ddff, #9baaf5, #d9ddff);
+}
+
+#campos{
+    width: 25%;
+    margin: 10px auto;
+    background: #f7f7f7;
+    border-radius: 3px;
+    overflow: scroll;
+}
+
+.campo{
+    text-align: center;
+    height: 75px;
+    width: 90%;
+    margin: 3px auto;
+    background: #7fa7c9;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px 0px;
+}
+
+.campo:hover{
+    background: #92afc9;
+}
+
+.boton{
+    width: 200px;
+    margin: 20px auto;
+}
+
+@media screen and (max-width: 800px){
+    .contenedor-form{flex-direction: column;}
+    .campos{width: 100%;}
+}

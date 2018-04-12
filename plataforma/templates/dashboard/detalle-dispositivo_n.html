@@ -19,27 +19,6 @@
 
 
 {% block contenido %}
-
-<div id="modal-sensor" class="modal">
-    <div class="dialogo-modal">
-        <div class="encabezado-modal">
-            <h2 class="margen">Nuevo Sensor</h2>
-        </div>
-        <div class="cuerpo-modal">
-            <form action="" class="formulario" method="post">
-                {% csrf_token %}
-                {% with formulario_sensor as form %}
-                    {% include "dashboard/form_template.html" %}  
-                {% endwith %}
-                <div class="pie-modal">
-                    <input class="boton boton-exito" type="submit" value="Crear">
-                    <input class="boton boton-advertencia" data-trigger="cerrar-modal" data-target="modal-dispositivo" type="button" value="Cancelar">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-    
 <div class="contenedor-main">
     <form action="{% url 'dashboard:modificar-dispositivo' dispositivo.id %}" class="formulario izquierda" method="POST">
         {% csrf_token %}
@@ -73,12 +52,12 @@
             </table>
 
             <div class="centrado">
-                <input data-trigger="abrir-modal" data-target="modal-sensor" class="boton boton-informacion" type="button" value="Nuevo Sensor">
+                <a href="{% url 'dashboard:form-sensor' dispositivo.id %}" class="boton boton-informacion">Nuevo Sensor</a>
             </div>
         {% else %}
             <h2 class="margen">{{dispositivo.nombre_de_dispositivo}} aun no cuenta con Sensores..</h2> 
             <div class="centrado">
-                <input data-trigger="abrir-modal" data-target="modal-sensor" class="boton boton-informacion" type="button" value="Nuevo Sensor">
+                <a href="{% url 'dashboard:form-sensor' dispositivo.id %}" class="boton boton-informacion">Nuevo Sensor</a>
             </div>
         {% endif %}
     </div>

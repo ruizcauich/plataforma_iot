@@ -31,6 +31,12 @@ h1,h2,h3,h4{
     font-family: 'Raleway', sans-serif , cursive;
 }
 
+.margen{
+    color: #304961;
+    text-align: center;
+    margin: 20px 0;
+}
+
 .contenedor{
     width: 100%;
     height: 100%;

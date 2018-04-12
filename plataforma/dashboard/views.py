@@ -6,7 +6,7 @@ from django.core import serializers
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 #IMPORTS PLATAFORMA
-from .models import Proyecto, Dispositivo, Sensor
+from .models import Proyecto, Dispositivo, Sensor,Campo
 from .forms import FormProyecto,FormDispositivo,FormSensor,FormCampo
 import json
 
@@ -174,9 +174,6 @@ def detalleDispositivo(request, id_dispositivo):
     return render(request, 'dashboard/detalle-dispositivo_n.html', contexto)
 
 
-
-
-
 # VISTA PARA LA MODIFICACIÓN DE DATOS DE ALGÚN DISPOSITIVO
 @login_required(login_url = 'cuentas:login')
 def modificarDispositivo(request, id):
@@ -201,6 +198,51 @@ def eliminarDispositivo(request, id):
         pass
     return HttpResponse("Dispositivo " + str(id) + " no eliminado " )
 
+# ==================
+#   VISTAS CORRESPONDIENTES A SENSORES
+# ==================
+@login_required(login_url = 'cuentas:login')
+def formularioSensor(request,id_dispositivo):
+
+    dispositivo = Dispositivo.objects.get(pk=id_dispositivo)
+    contexto = {
+        'dispositivo': dispositivo
+    }
+    
+    return render(request, 'dashboard/form-sensor_n.html' , contexto)
+
+@login_required(login_url = 'cuentas:login')
+def crearSensor(request,id_dispositivo):
+    
+    #Obtenemos los datos del sensor
+    nombre = request.GET.get("nombre_sensor","false")
+    tipo = request.GET.get("tipo_sensor","false")
+    habilitado = True if request.GET.get("habilitado_sensor","false") == 'on' else False
+
+    #Obtenemos los datos de los campos del sensor
+    nombres_campo = request.GET.get("nombres_campo","false")
+    tipos_campo = request.GET.get("tipos_campo","false")
+
+    #Obtenemos el dispositivo
+    dispositivo = Dispositivo.objects.get(pk=id_dispositivo)
+
+    #Creamos y guardamos en la base de datos el nuevo sensor
+    nuevo_sensor = Sensor.objects.create(nombre_de_sensor=nombre,tipo=tipo,esta_habilitado=habilitado,dispositivo=dispositivo)
+    nuevo_sensor.save()
+
+    #Con el método split obtenemos una lista por cada serie de campos y tipos
+    campos = nombres_campo.split(',')
+    tipos = tipos_campo.split(',')
+    del campos[-1]
+    del tipos[-1]
+
+    #Creamos y guardamos cada uno de los campos del sensor
+    for i in range(0,len(campos)):
+        nuevo_campo = Campo.objects.create(nombre_de_campo=campos[i],tipo_de_valor=tipos[i],sensor=nuevo_sensor)
+        nuevo_campo.save()
+
+    #Una vez terminada todas las operaciones redirijimos al dispositivo
+    return redirect( 'dashboard:detalle-dispositivo',dispositivo.id)
 
 def obtenerCoordenadas(request, id_proyecto):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)

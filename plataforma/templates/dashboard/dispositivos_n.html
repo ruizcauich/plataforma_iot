@@ -5,6 +5,8 @@
 
 {% block links_templates %}
 <link rel="stylesheet" href="{% static '/css/dashboard/tabla.css' %}">
+<link rel="stylesheet" href="{% static '/css/modal.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/formulario.css' %}">
 {% endblock %}
 
 {% block usuario %}
@@ -15,6 +17,25 @@
 {%block titulo_cabecera %} Dispositivos {% endblock %}
 
 {% block contenido %}
+
+<div id="modal-dispositivo" class="modal">
+    <div class="dialogo-modal">
+        <div class="encabezado-modal">
+            <h2 class="margen">Nuevo Dispositivo</h2>
+        </div>
+        <div class="cuerpo-modal">
+            <form action="{% url 'dashboard:crear-dispositivo' %}" class="formulario" method="post">
+                {% csrf_token %}
+                {% include "dashboard/form_template.html" %}
+                <div class="pie-modal">
+                    <input class="boton boton-exito" type="submit" value="Crear">
+                    <input class="boton boton-advertencia" data-trigger="cerrar-modal" data-target="modal-dispositivo" type="button" value="Cancelar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 {% if dispositivos %}
 <table class="tabla">
@@ -41,7 +62,7 @@
         {% else %}
             <td class="centrado"><input type="checkbox" name="habilitado" id="" disabled></td>
         {% endif %}
-        <td class="opciones"><a href=""><span class="ion-eye"></span></a></td>
+        <td class="opciones"><a href="{% url 'dashboard:detalle-dispositivo' dispositivo.id %}"><span class="ion-eye"></span></a></td>
         <td class="opciones">
             <a onclick="" data-target="">
                 <span class="ion-trash-a"></span>
@@ -49,12 +70,15 @@
         </td>
     </tr>
     {% endfor %}
+</table>
+<div class="centrado">
+    <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
+</div>
 
-</table> 
 {% else %}
     <h2 class="margen">Aun no cuentas con Dispositivos..</h2>
     <div class="centrado">
-        <input data-trigger="abrir-modal" data-target="modal-proyecto" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
+        <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
     </div>
     
 {% endif %}
@@ -63,7 +87,8 @@
 
 
 {% block scripts_extra %}
-  
+<script src="{% static '/js/arlibreria.js' %}"></script>
+<script src="{% static '/js/modal.js' %}"></script>
 {% endblock %}
 
 

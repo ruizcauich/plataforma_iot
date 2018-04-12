@@ -1,0 +1,46 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %}Nuevo Sensor{% endblock %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/formulario.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/form_sensor.css' %}">
+<script src="{% static 'js/crear-sensor.js' %}"></script> 
+{% endblock %}
+
+{% block titulo_cabecera %}Nuevo Sensor{% endblock %}
+
+{% block contenido %}
+<div class="contenedor-form">
+    <form action="{% url 'dashboard:crear-sensor' dispositivo.id %}" class="formulario izquierda grande" method="GET">
+        <label for="id_nombre_de_sensor">Nombre</label>
+        <input type="text" name="nombre_sensor" id="id_nombre_de_sensor">
+        <label for="id_tipo">tipo</label>
+        <input type="text" name="tipo_sensor" id="id_tipo">
+        <label for="id_habilitado">Habilitado</label>
+        <input type="checkbox" name="habilitado_sensor" id="id_habilitado">
+        <input type="text" name="nombres_campo" id="id_nombre_campo" hidden>
+        <input type="text" name="tipos_campo" id="id_tipo_valor" hidden>
+        <h3 class="margen">Campos</h3>
+        <label for="id_nombre_de_campo">Nombre</label>
+        <input type="text" id="id_nombre_de_campo_js">
+        <label for="id_tipo_valor">Tipo de Valor</label>
+        <input type="text" id="id_tipo_valor_js">
+        <input type="button" value="Agregar" class="boton boton-informacion" onclick="agregarCampo()">
+        <hr>
+        <input type="submit" value="Guardar Sensor" class="boton boton-exito">
+    </form>
+
+    <div id="campos">
+        <h3 class="margen">Campos</h3>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+{% block scripts_extra %}
+
+{% endblock %}
