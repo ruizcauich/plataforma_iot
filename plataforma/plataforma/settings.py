@@ -25,7 +25,7 @@ SECRET_KEY = 'kg_baa)1048a$ihnwoposq!6a2li*!4fzm5+g6rgu*9unuq#!o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
 
 #Configuraciones para el uso del email en django
 EMAIL_HOST = 'smtp.gmail.com'

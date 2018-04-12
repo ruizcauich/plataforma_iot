@@ -31,7 +31,7 @@ def guardar_json(request):
     '''
     #Se tiene que determinar si se recibe algún json
     try:
-        json_recibido = json.loads(request.body)
+        json_recibido = json.loads(request.body.decode('utf-8'))
     except:
         return HttpResponse("Su estructura json no esta bien formada")
     

@@ -1,0 +1,39 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %}Gráfica{% endblock  %}
+
+{% block links_templates %}
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<link href="{% static '/css/modal.css' %}" rel="stylesheet">
+<script src="{% static '/js/amcharts/serial.js' %}"></script>
+<script src="{% static '/js/amcharts/plugins/export/export.min.js'%}"></script>
+<link rel="stylesheet" href="{% static '/js/amcharts/plugins/export/export.css'%}" type="text/css" media="all" />
+<style>
+    #chart{
+        min-height: 500px;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block usuario %}
+{{usuario}}
+{% endblock %}
+
+
+{%block titulo_cabecera %} Gráfica de dispositivo.
+
+{% endblock %}
+
+{% block contenido %}
+<div  id="chart"></div>
+{% endblock %}
+
+{% block scripts_extra %}
+
+<script src="{% static '/js/arlibreria.js' %}"></script>
+<script src="{% static '/js/modal.js' %}"></script>
+<script> var url = "{% url 'reportes:obtener-datos' dispositivo%}"</script>
+<script src="{% static '/js/graficar.js' %}"></script>
+{% endblock %}

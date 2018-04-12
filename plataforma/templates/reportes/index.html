@@ -1,0 +1,61 @@
+{% extends 'dashboard/base_n.html' %}
+{% load staticfiles %}
+
+{% block titulo %}Reportes{% endblock  %}
+
+{% block links_templates %}
+<link rel="stylesheet" href="{% static '/css/dashboard/index.css' %}">
+<link rel="stylesheet" href="{% static '/css/modal.css' %}">
+{% endblock %}
+
+{% block usuario %}
+{{usuario}}
+{% endblock %}
+
+
+{%block titulo_cabecera %} Reportes, gráficos y estadisticas. {% endblock %}
+
+{% block contenido %}
+<div class="contenedor-articulos">
+    <div class="articulo">
+        <div class="articulo-header">
+            <h2 class="titulo-articulo">Reportes</h2>
+            <p class="articulo-descripcion">
+                Genera reportes de los datos que estan almacenados, incluye estadísticas básicas y graficos por periodo de tiempo.
+            </p>
+        </div>
+        <div class="articulo-contenido">
+            <a class="boton boton-exito" href="{%url 'reportes:index' %}">Obtener premium...</a>
+        </div>
+    </div>
+    <div class="articulo">
+        <div class="articulo-header">
+            <h2 class="titulo-articulo">Graficos</h2>
+            <p class="articulo-descripcion">
+                Examina los datos históricos y en tiempo real de tus dispositivos IoT
+                mediante gráficas dinámicas que ayudan a comprender el comportamiento de los datos. <br>
+                
+            </p>
+        </div>
+        <div class="articulo-contenido">
+            <a class="boton boton-exito" href="{%url 'reportes:graficar' 12%}">Obtener premium...</a>
+        </div>
+    </div>
+    <div class="articulo">
+        <div class="articulo-header">
+            <h2 class="titulo-articulo">Estadísticas</h2>
+            <p class="articulo-descripcion">
+                Genera estadísticas básicas con nuestras poderosas herramientas de analisis de datos.
+            </p>
+        </div>
+        <div class="articulo-contenido">
+            <a class="boton boton-exito" href="{%url 'reportes:estadisticas'%}">Obtener premium...</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts_extra %}
+<script src="{% static '/js/modal.js' %}"></script>
+{% endblock %}
