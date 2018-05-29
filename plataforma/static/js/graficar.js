@@ -132,33 +132,39 @@ function mostrarNumeroRegistros(){
 
 }
 
-// setInterval( function() {
-//     // normally you would load new datapoints here,
-//     // but we will just generate some random values
-//     // and remove the value from the beginning so that
-//     // we get nice sliding graph feeling
+setInterval( function() {
+    var realTimeRequest = new XMLHttpRequest();
+    // normally you would load new datapoints here,
+    // but we will just generate some random values
+    // and remove the value from the beginning so that
+    // we get nice sliding graph feeling
   
-//     // remove datapoint from the beginning
-//     //chart.dataProvider.shift();
+    // remove datapoint from the beginning
+    //chart.dataProvider.shift();
   
-//     // add new one at the end
-//     aj.onreadystatechange = function(){
-//         if(this.readyState == 4 && this.status==200 && chart!=null){
-//             console.log(this.responseText);
-//             dat = JSON.parse(this.responseText);
+    // add new one at the end
+    realTimeRequest.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status==200 && chart!=null){
+            console.log(this.responseText);
+            var rtDat
+            rtDat = JSON.parse(this.responseText);
             
-//             for( valores of dat ){
-//                 //chart.dataProvider.push( valores);
-//             }
-//             chart.validateData();
+            for( valores of rtDat ){
+                valores.fecha = new Date(valores.fecha)
+                console.log(valores.fecha)
+               chart.dataProvider.push( valores);
+               chart.dataProvider.shift();
+            }
+            chart.validateData();
             
-//         }
-//     }
+            
+        }
+    }
 
-//     //aj.open("GET", urlRT, true);
-//     //aj.send();
+    realTimeRequest.open("GET", urlRT, true);
+    realTimeRequest.send();
     
 
 
     
-//   }, 1000 );
+  }, 1000 );

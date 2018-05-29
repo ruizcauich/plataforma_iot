@@ -37,7 +37,7 @@ def obtenerDatos(request, dispositivo):
     for ele in lista_datos:
         ele["fecha"] = ele["fecha"].ctime()
     
-    return HttpResponse(json.dumps(lista_datos[:numCampos*50]), content_type="application/json")
+    return HttpResponse(json.dumps(lista_datos[-numCampos*100:]), content_type="application/json")
     
 
 def obtenerUltimasLecturas(request, dispositivo):
@@ -50,7 +50,8 @@ def obtenerUltimasLecturas(request, dispositivo):
     '''
     SELECT  dashboard_valor.id, valor, fecha_hora_lectura, campo_id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo)AS 'nombre_val'
     from dashboard_valor, dashboard_campo, dashboard_sensor
-    WHERE dashboard_valor.campo_id = dashboard_campo.id AND dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+str(dispositivo)+''' GROUP BY fecha_hora_lectura 
+    WHERE dashboard_valor.campo_id = dashboard_campo.id AND dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+str(dispositivo)+'''  
+    AND fecha_hora_lectura > DATE_SUB( CURRENT_TIMESTAMP(), INTERVAL 1 SECOND) 
     ORDER BY fecha_hora_lectura ASC LIMIT '''+str(num_campos)+''' ;
     '''
     )
