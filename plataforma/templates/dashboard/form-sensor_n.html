@@ -15,15 +15,15 @@
 <div class="contenedor-form">
     <form action="{% url 'dashboard:crear-sensor' dispositivo.id %}" class="formulario izquierda grande" method="GET">
         <label for="id_nombre_de_sensor">Nombre</label>
-        <input type="text" name="nombre_sensor" id="id_nombre_de_sensor">
+        <input type="text" name="nombre_sensor" id="id_nombre_de_sensor" required>
         <label for="id_tipo">tipo</label>
-        <input type="text" name="tipo_sensor" id="id_tipo">
+        <input type="text" name="tipo_sensor" id="id_tipo" required>
         <label for="id_habilitado">Habilitado</label>
         <input type="checkbox" name="habilitado_sensor" id="id_habilitado">
         <input type="text" name="nombres_campo" id="id_nombre_campo" hidden>
         <input type="text" name="tipos_campo" id="id_tipo_valor" hidden>
         <h3 class="margen">Campos</h3>
-        <label for="id_nombre_de_campo">Nombre</label>
+        <label for="id_nombre_de_campo_js">Nombre</label>
         <input type="text" id="id_nombre_de_campo_js">
         <label for="id_tipo_valor">Tipo de Valor</label>
         <input type="text" id="id_tipo_valor_js">

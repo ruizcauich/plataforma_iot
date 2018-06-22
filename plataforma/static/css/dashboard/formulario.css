@@ -18,6 +18,10 @@
     color: #5a5a5a;
 }
 
+input:required {
+    box-shadow: none;
+}
+
 .izquierda{
     margin-bottom: 100px;
     margin-left: 20px;
@@ -84,4 +88,7 @@ select{
     .formulario{width: 90% ; margin-bottom: 50px;}
     .izquierda{margin: 20px auto;}
 }
-@media screen and (max-width: 400px){.formulario{width: 95% ; margin-bottom: 50px;}}
+@media screen and (max-width: 400px){
+    .formulario{width: 95% ; margin-bottom: 50px;}
+    
+}
