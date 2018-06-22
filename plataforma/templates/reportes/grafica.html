@@ -34,6 +34,9 @@
 
 <script src="{% static '/js/arlibreria.js' %}"></script>
 <script src="{% static '/js/modal.js' %}"></script>
-<script> var url = "{% url 'reportes:obtener-datos' dispositivo%}"</script>
+<script>
+    var url = "{% url 'reportes:obtener-datos' dispositivo%}";
+    var urlRT =  "{% url 'reportes:obtener-realtime' dispositivo%}";
+</script>
 <script src="{% static '/js/graficar.js' %}"></script>
 {% endblock %}

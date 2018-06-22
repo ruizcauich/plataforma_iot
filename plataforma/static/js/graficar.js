@@ -1,5 +1,7 @@
 var ejesDeGrafica = [];
-var  confi_de_graficos = []
+var  confi_de_graficos = [];
+var chart;
+
 function generarInfoParaGrafica(ejes){
     // naranja, azul, rojo, verde, morado, 
     var colors = ["#ff681f","#02a4d3","#d92121", "#3aa655", "#639"];
@@ -32,7 +34,7 @@ function generarInfoParaGrafica(ejes){
 }
 
 function graficar( data ){
-var ejes = [];
+    var ejes = [];
     for(d of data){
         d.fecha = new Date(d.fecha);
         for( atributo in d ){
@@ -42,7 +44,7 @@ var ejes = [];
         }
     }
     generarInfoParaGrafica(ejes);
-    var chart = AmCharts.makeChart( "chart", {
+    chart = AmCharts.makeChart( "chart", {
         "type": "serial",
         "theme": "light",
         "legend": {
@@ -53,7 +55,7 @@ var ejes = [];
         "synchronizeGrid":true,
         "dataDateFormat": "YYYY-MM-DD HH:NN:SS",
         "gridAboveGraphs": true,
-        "startDuration": 1,
+        //"startDuration": 1,
         "valueAxes": //ejesDeGrafica,
         [ {
             "gridColor": "#FFFFFF",
@@ -88,6 +90,7 @@ var ejes = [];
 
         } );
 }
+
 var dat;
 var aj = new XMLHttpRequest();
 aj.onreadystatechange = function(){
@@ -110,6 +113,8 @@ aj.onreadystatechange = function(){
 
 aj.open("GET", url, true);
 aj.send();
+
+
 function otravez( max){
     ejesDeGrafica = [];
     confi_de_graficos=[];
@@ -126,3 +131,40 @@ function mostrarNumeroRegistros(){
     otravez(numeroRegistros);
 
 }
+
+setInterval( function() {
+    var realTimeRequest = new XMLHttpRequest();
+    // normally you would load new datapoints here,
+    // but we will just generate some random values
+    // and remove the value from the beginning so that
+    // we get nice sliding graph feeling
+  
+    // remove datapoint from the beginning
+    //chart.dataProvider.shift();
+  
+    // add new one at the end
+    realTimeRequest.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status==200 && chart!=null){
+            console.log(this.responseText);
+            var rtDat
+            rtDat = JSON.parse(this.responseText);
+            
+            for( valores of rtDat ){
+                valores.fecha = new Date(valores.fecha)
+                console.log(valores.fecha)
+               chart.dataProvider.push( valores);
+               chart.dataProvider.shift();
+            }
+            chart.validateData();
+            
+            
+        }
+    }
+
+    realTimeRequest.open("GET", urlRT, true);
+    realTimeRequest.send();
+    
+
+
+    
+  }, 1000 );
