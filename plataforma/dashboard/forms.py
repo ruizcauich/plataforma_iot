@@ -22,13 +22,17 @@ class FormDispositivo(forms.ModelForm):
             'esta_habilitado' : 'Habilitado',
             'fecha_creacion' : 'Fecha de Creación',
         }
-    def __init__(self, *args, **kwargs):
+    def __init__(self,*args, **kwargs):
         from django.forms.widgets import HiddenInput
         hide = kwargs.pop('hide',None)
+        usuario = kwargs.pop('usuario',None)
         super(FormDispositivo, self).__init__(*args, **kwargs)
         if hide:
             for field in hide:
                 self.fields[field].widget = HiddenInput()
+
+        if usuario:
+            self.fields['proyecto'].queryset = Proyecto.objects.filter(usuario=usuario)
 
 class FormSensor(forms.ModelForm):
     class Meta:

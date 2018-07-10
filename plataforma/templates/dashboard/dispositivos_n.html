@@ -62,9 +62,13 @@
         {% else %}
             <td class="centrado"><input type="checkbox" name="habilitado" id="" disabled></td>
         {% endif %}
-        <td class="opciones"><a href="{% url 'dashboard:detalle-dispositivo' dispositivo.id %}"><span class="ion-eye"></span></a></td>
         <td class="opciones">
-            <a onclick="" data-target="">
+            <a href="{% url 'dashboard:detalle-dispositivo' dispositivo.id %}">
+                <span class="ion-eye"></span>
+            </a>
+        </td>
+        <td class="opciones">
+            <a href="{% url 'dashboard:eliminar-dispositivo' dispositivo.id %}" data-target="">
                 <span class="ion-trash-a"></span>
             </a>
         </td>

@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^dispositivos/([0-9]+)$', views.detalleDispositivo, name = 'detalle-dispositivo'),
     #dashboard/dispositivos/345/modificar
     url(r'^dispositivos/([0-9]+)/modificar$', views.modificarDispositivo, name = 'modificar-dispositivo'),
-    url(r'^dispositivos/([0-9]+)/eliminar$', views.eliminarDispositivo, name = 'aliminar-dispositivo'),
+    url(r'^dispositivos/([0-9]+)/eliminar$', views.eliminarDispositivo, name = 'eliminar-dispositivo'),
     #dashboard/sensores/crear
     url(r'^sensores/formulario/([0-9]+)$', views.formularioSensor, name='form-sensor'),
     #dashboard/sensores/crear/4

@@ -51,21 +51,31 @@ def formularioProyecto(request):
 
     usuario = User.objects.get(username=request.user)
     proyectos = Proyecto.objects.filter(usuario=request.user)
-    numero_dispositivos = 0
+
     numero_sensores = 0
+    numero_dispositivos = 0
+    lista_proyectos = []
 
     for pro in proyectos:
         for dis in pro.dispositivo_set.all():
-            numero_dispositivos+=1
             for sen in dis.sensor_set.all():
                 numero_sensores+=1
-    
+            numero_dispositivos+=1
+        
+        lista_proyectos.append({
+            'id': pro.id,
+            'nombre': pro.nombre_de_proyecto,
+            'descripcion': pro.descripcion,
+            'dispositivos': numero_dispositivos,
+            'sensores': numero_sensores
+        })
+        numero_sensores = 0
+        numero_dispositivos = 0
 
     context = {
         'usuario': usuario,
         'form': form,
-        'proyectos': proyectos,
-        'numero_sensores': numero_sensores,
+        'proyectos': lista_proyectos,
     }
 
     return render(request,'dashboard/proyectos_n.html',context)
@@ -101,7 +111,7 @@ def detalleProyecto(request, id_proyecto):
     dispositivos = proyecto.dispositivo_set.all()
 
     form = FormProyecto(instance=proyecto)
-    formDisp = FormDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'])
+    formDisp = FormDispositivo( initial={'proyecto':str(proyecto.id)}, hide=['proyecto'],usuario=request.user)
 
     usuario = User.objects.get(username=request.user)
     contexto= {
@@ -120,8 +130,7 @@ def detalleProyecto(request, id_proyecto):
 # VISTA QUE ENLISTA TODOS LOS DISPOSITIVOS
 @login_required(login_url = 'cuentas:login')
 def formularioDispositivo(request):
-
-    form = FormDispositivo(request.POST or None)
+    form = FormDispositivo(request.POST or None,usuario=request.user)
     usuario = User.objects.get(username=request.user)
 
     if form.is_valid():

@@ -47,16 +47,16 @@
         <th>Opciones</th>
     </tr>
     {% for proyecto in proyectos %}
-    <tr>
-        <td>{{proyecto.nombre_de_proyecto}}</td>
-        <td>{{proyecto.descripcion | truncatewords:10}}</td>
-        <td>{{proyecto.dispositivo_set.count}}</td>
-        <td>{{numero_sensores}}</td>
-        <td class="opciones"><a href="{%url 'dashboard:detalle-proyecto' proyecto.id%}"><span class="ion-eye"></span></a></td>
-        <td class="opciones">
-            <a onclick="eliminarRegistro(this)" data-target="{{proyecto.id}}">
-                <span class="ion-trash-a"></span></a></td>
-    </tr>
+        <tr>
+            <td>{{proyecto.nombre}}</td>
+            <td>{{proyecto.descripcion | truncatewords:10}}</td>
+            <td>{{proyecto.dispositivos}}</td>
+            <td>{{proyecto.sensores}}</td>
+            <td class="opciones"><a href="{%url 'dashboard:detalle-proyecto' proyecto.id%}"><span class="ion-eye"></span></a></td>
+            <td class="opciones">
+                <a onclick="eliminarRegistro(this)" data-target="{{proyecto.id}}">
+                    <span class="ion-trash-a"></span></a></td>
+        </tr>
     {% endfor %}
 
 </table> 
