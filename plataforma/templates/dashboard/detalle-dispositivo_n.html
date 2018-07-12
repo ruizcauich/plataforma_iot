@@ -45,7 +45,7 @@
                         {% else %}
                             <td class="centrado"><input type="checkbox" name="habilitado" id="" disabled></td>
                         {% endif %}
-                        <td class="opciones"><a href=""><span class="ion-trash-a"></a></span></td>
+                        <td class="opciones"><a onclick="eliminarRegistro(this)" data-target="{{ sensor.id }}"><span class="ion-trash-a"></a></span></td>
                     </tr>
                 {% endfor %}
         
@@ -54,6 +54,23 @@
             <div class="centrado">
                 <a href="{% url 'dashboard:form-sensor' dispositivo.id %}" class="boton boton-informacion">Nuevo Sensor</a>
             </div>
+
+            <div id="avisoEliminar" class="modal advertencia">
+                <div class="dialogo-modal-reducido">
+                    <div class="encabezado-modal"></div>
+                    <div class="cuerpo-modal">
+                        <p>
+                            Esta por eliminar un sensor, esta acción no tiene modo de revertirse.
+                        </p>
+                    </div>
+                    <div class="pie-modal">
+                        <button class="boton" data-trigger="cerrar-modal" data-target="avisoEliminar">Cancelar</button>
+                        <button class="boton boton-advertencia" onclick="eliminar()">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+            
+
         {% else %}
             <h2 class="margen">{{dispositivo.nombre_de_dispositivo}} aun no cuenta con Sensores..</h2> 
             <div class="centrado">
@@ -72,4 +89,44 @@
 {% block scripts_extra %}
 <script src="{% static '/js/arlibreria.js' %}"></script>
 <script src="{% static '/js/modal.js' %}"></script>
+
+<script>
+    var url = "";
+    var avisoE = new LIBRERIA.Modal("avisoEliminar");
+    function eliminarRegistro(boton){
+        url = "http://localhost:8000/dashboard/sensores/"
+        url += boton.dataset["target"] + "/eliminar";
+        console.log(url)
+        avisoE.abrir()
+    }
+    function eliminar(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                var mensaje = new LIBRERIA.Modal("mensaje");
+                mensaje.cuerpo.innerHTML = this.responseText;
+                mensaje.cuerpo.innerHTML += "<br>La página se refrescará en 3 segundos..." ;
+                mensaje.reducido();
+                if(this.status==200){
+                    mensaje.encabezado.innerHTML = "<h2>Estado: 200 Ok </h2>";
+                    mensaje.exito();
+                }else{
+                    mensaje.encabezado.innerHTML = "<h2>Estado:"+this.status+" </h2>";
+                    mensaje.peligro();
+                }
+                location.href = window.location.protocol +'//'+ window.location.host + window.location.pathname;
+                mensaje.abrir();
+                
+                setTimeout( function(){
+                    
+                    location.reload();
+                }, 3000)            
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+        avisoE.cerrar();
+    }
+
+</script>
 {% endblock %}

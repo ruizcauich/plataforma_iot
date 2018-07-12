@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^sensores/formulario/([0-9]+)$', views.formularioSensor, name='form-sensor'),
     #dashboard/sensores/crear/4
     url(r'sensores/crear/([0-9]+)$', views.crearSensor, name="crear-sensor"),
+    #dashboard/sensores/4/eliminar
+    url(r'sensores/([0-9]+)/eliminar$', views.eliminarSensor, name="eliminar-sensor"),
     #dashboard/configuracion
     url(r'^configuracion/$', views.configuracion, name='configuracion'),
     #dashboard/red-proyecto/

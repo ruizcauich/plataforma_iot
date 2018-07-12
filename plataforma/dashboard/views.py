@@ -170,7 +170,8 @@ def detalleDispositivo(request, id_dispositivo):
     lista_sensores = []
     lista_sensores = dispositivo.sensor_set.all()
 
-    formulario_dispositivo = FormDispositivo(instance=dispositivo)
+    formulario_dispositivo = FormDispositivo(request.POST or None,usuario=request.user,instance=dispositivo)
+    #form = FormDispositivo(request.POST or None,usuario=request.user)
     formulario_sensor = FormSensor(request.POST or None)
 
     contexto = {
@@ -252,6 +253,16 @@ def crearSensor(request,id_dispositivo):
 
     #Una vez terminada todas las operaciones redirijimos al dispositivo
     return redirect( 'dashboard:detalle-dispositivo',dispositivo.id)
+
+@login_required(login_url = 'cuentas:login')
+def eliminarSensor(request, id):
+    sensor = get_object_or_404(Sensor,pk=id)
+    try:
+        sensor.delete()
+        return HttpResponse("Sensor" + str(id) + "eliminado exitosamente ")
+    except:
+        pass
+    return HttpResponse("Sensor" + str(id) + "no eliminado")
 
 def obtenerCoordenadas(request, id_proyecto):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)

@@ -68,13 +68,29 @@
             </a>
         </td>
         <td class="opciones">
-            <a href="{% url 'dashboard:eliminar-dispositivo' dispositivo.id %}" data-target="">
+            <a onclick="eliminarRegistro(this)" data-target="{{ dispositivo.id }}">
                 <span class="ion-trash-a"></span>
             </a>
         </td>
     </tr>
     {% endfor %}
 </table>
+
+<div id="avisoEliminar" class="modal advertencia">
+    <div class="dialogo-modal-reducido">
+        <div class="encabezado-modal"></div>
+        <div class="cuerpo-modal">
+            <p>
+                Esta por eliminar un dispositivo, esta acción no tiene modo de revertirse.
+            </p>
+        </div>
+        <div class="pie-modal">
+            <button class="boton" data-trigger="cerrar-modal" data-target="avisoEliminar">Cancelar</button>
+            <button class="boton boton-advertencia" onclick="eliminar()">Confirmar</button>
+        </div>
+    </div>
+</div>
+
 <div class="centrado">
     <input data-trigger="abrir-modal" data-target="modal-dispositivo" class="boton boton-informacion" type="button" value="Nuevo Dispositivo">
 </div>
@@ -93,4 +109,40 @@
 {% block scripts_extra %}
 <script src="{% static '/js/arlibreria.js' %}"></script>
 <script src="{% static '/js/modal.js' %}"></script>
+<script>
+    var url = "";
+    var avisoE = new LIBRERIA.Modal("avisoEliminar");
+    function eliminarRegistro(boton){
+        url = boton.dataset["target"]+"/eliminar";
+        avisoE.abrir();
+    }
+    function eliminar(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                var mensaje = new LIBRERIA.Modal("mensaje");
+                mensaje.cuerpo.innerHTML = this.responseText;
+                mensaje.cuerpo.innerHTML += "<br>La página se refrescará en 3 segundos..." ;
+                mensaje.reducido();
+                if(this.status==200){
+                    mensaje.encabezado.innerHTML = "<h2>Estado: 200 Ok </h2>";
+                    mensaje.exito();
+                }else{
+                    mensaje.encabezado.innerHTML = "<h2>Estado:"+this.status+" </h2>";
+                    mensaje.peligro();
+                }
+                location.href = window.location.protocol +'//'+ window.location.host + window.location.pathname;
+                mensaje.abrir();
+                setTimeout( function(){
+                    
+                    location.reload();
+                }, 3000)
+
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+        avisoE.cerrar();
+    }
+</script>
 {% endblock %}
