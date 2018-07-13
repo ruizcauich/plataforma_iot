@@ -229,9 +229,11 @@ def crearSensor(request,id_dispositivo):
     tipo = request.GET.get("tipo_sensor","false")
     habilitado = True if request.GET.get("habilitado_sensor","false") == 'on' else False
 
+
     #Obtenemos los datos de los campos del sensor
     nombres_campo = request.GET.get("nombres_campo","false")
     tipos_campo = request.GET.get("tipos_campo","false")
+
 
     #Obtenemos el dispositivo
     dispositivo = Dispositivo.objects.get(pk=id_dispositivo)
@@ -243,8 +245,10 @@ def crearSensor(request,id_dispositivo):
     #Con el método split obtenemos una lista por cada serie de campos y tipos
     campos = nombres_campo.split(',')
     tipos = tipos_campo.split(',')
-    del campos[-1]
-    del tipos[-1]
+
+
+    print(campos)
+    print(tipos)
 
     #Creamos y guardamos cada uno de los campos del sensor
     for i in range(0,len(campos)):
