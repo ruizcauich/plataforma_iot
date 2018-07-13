@@ -1,16 +1,14 @@
 #IMPORTS DE DJANGO
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 #IMPORTS PLATAFORMA
-from dashboard.models import Proyecto, Dispositivo, Sensor, Campo,Valor
+from dashboard.models import Proyecto, Dispositivo, Sensor, Campo, Valor
 #IMPORTS PYTHON
-import json
-import time
-
-
+import json, math
+from datetime import datetime
 
 @csrf_exempt
 def guardar_json(request):
@@ -47,7 +45,9 @@ def guardar_json(request):
         return HttpResponse('dispositivo no encontrado')
     
     registrado = ''
-
+    dt = json_recibido["fecha"].split("/")
+    hr = json_recibido["hora"].split(":")
+    date_time = datetime(day = dt[0], month=dt[1], year=dt[2], hour=hr[0], minute=hr[1], second=hr[3])
     #En caso de que sensores no existan o ocurra una excepcion al insertar en la base de datos
     try:
         sensores = json_recibido["sensores"]
@@ -62,7 +62,7 @@ def guardar_json(request):
                 #Se trae el campo a insertar
                 campo = objeto_sensor.campo_set.get( nombre_de_campo = k)
                 # Creamos un nuevo Valor_De_Campo perteneciente al conjunto de este
-                campo.valor_set.create(valor = str(v))
+                campo.valor_set.create(valor = str(v), fecha_dispisitivo=date_time)
                 registrado += "Campo: " + k + ",  "
 
             registrado += "]"
@@ -129,3 +129,54 @@ def guardar_datos(request):
         return HttpResponse('Error en los datos')
     
     return HttpResponse('datos insertados ' + cadena)
+
+
+def obtenerDatos(request, dispositivo):
+    dispositivo = get_object_or_404(Dispositivo, pk=dispositivo)
+    lista_datos =[]
+    numCampos = 0
+    for sensor in dispositivo.sensor_set.all(): 
+        for campo in sensor.campo_set.all():
+            numCampos+=1
+            for valor in campo.valor_set.all().order_by("fecha_hora_lectura"):
+                valor_valor = float(valor.valor) 
+                if not math.isnan(valor_valor) :
+                    dato = {
+                        "fecha": valor.fecha_hora_lectura,
+                        sensor.nombre_de_sensor+ "_" + campo.nombre_de_campo: valor_valor,
+                    }
+                    lista_datos.append(dato)
+    
+    lista_datos.sort(key=lambda registro:registro["fecha"])
+    for ele in lista_datos:
+        ele["fecha"] = ele["fecha"].ctime()
+    
+    return HttpResponse(json.dumps(lista_datos[-numCampos*100:]), content_type="application/json")
+    
+
+def obtenerUltimasLecturas(request, dispositivo):
+    #dispositivo = get_object_or_404(Dispositivo, pk=dispositivo)
+    lista_datos =[]
+    num_campos = Campo.objects.raw('''SELECT COUNT(nombre_de_campo) AS numCampos, dashboard_campo.id FROM  dashboard_campo, dashboard_sensor
+    WHERE  dashboard_campo.sensor_id=dashboard_sensor.id AND
+    dashboard_sensor.dispositivo_id='''+str(dispositivo))[0].numCampos
+    lista_raw = Valor.objects.raw(
+    '''
+    SELECT  dashboard_valor.id, valor, fecha_hora_lectura, campo_id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo)AS 'nombre_val'
+    from dashboard_valor, dashboard_campo, dashboard_sensor
+    WHERE dashboard_valor.campo_id = dashboard_campo.id AND dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+str(dispositivo)+'''  
+    AND fecha_hora_lectura > DATE_SUB( CURRENT_TIMESTAMP(), INTERVAL 1 SECOND) 
+    ORDER BY fecha_hora_lectura ASC LIMIT '''+str(num_campos)+''' ;
+    '''
+    )
+    
+    for el in lista_raw:
+        if not math.isnan( float(el.valor) ) :
+            dato = {
+                "fecha": el.fecha_hora_lectura.ctime(),
+                el.nombre_val :el.valor
+            }
+            lista_datos.append(dato)
+    
+    return HttpResponse( json.dumps(lista_datos), content_type="application/json" )
+
