@@ -65,7 +65,7 @@ def guardar_json(request):
                 campo = objeto_sensor.campo_set.get( nombre_de_campo = k)
                 # Creamos un nuevo Valor_De_Campo perteneciente al conjunto de este
                 valor = campo.valor_set.create(valor = str(v))
-                valor.fecha_dispisitivo=date_time
+                valor.fecha_dispositivo=date_time
                 valor.save()
                 registrado += "Campo: " + k + ",  "
 
