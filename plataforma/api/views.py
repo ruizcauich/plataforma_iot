@@ -136,26 +136,26 @@ def guardar_datos(request):
 
 
 def obtenerDatos(request, dispositivo):
-    dispositivo = get_object_or_404(Dispositivo, pk=dispositivo)
     lista_datos =[]
-    numCampos = 0
-    for sensor in dispositivo.sensor_set.all(): 
-        for campo in sensor.campo_set.all():
-            numCampos+=1
-            for valor in campo.valor_set.all().order_by("fecha_hora_lectura"):
-                valor_valor = float(valor.valor) 
-                if not math.isnan(valor_valor) :
-                    dato = {
-                        "fecha": valor.fecha_hora_lectura,
-                        sensor.nombre_de_sensor+ "_" + campo.nombre_de_campo: valor_valor,
-                    }
-                    lista_datos.append(dato)
-    
+    num_campos = Campo.objects.raw('''SELECT COUNT(nombre_de_campo) AS numCampos, dashboard_campo.id FROM  dashboard_campo, dashboard_sensor
+    WHERE  dashboard_campo.sensor_id=dashboard_sensor.id AND
+    dashboard_sensor.dispositivo_id='''+str(dispositivo))[0].numCampos
+    lista_raw = Valor.objects.raw(
+    '''
+    SELECT  dashboard_valor.id, valor, fecha_hora_lectura, campo_id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo)AS 'nombre_val'
+    from dashboard_valor, dashboard_campo, dashboard_sensor
+    WHERE dashboard_valor.campo_id = dashboard_campo.id AND dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+str(dispositivo)+'''  
+    ORDER BY fecha_hora_lectura DESC LIMIT '''+str(num_campos*100)+''' ;
+    '''
+    )
+
+    lista_datos = [ ele for ele in lista_raw if not math.isnan(float(ele.valor))]
+
     lista_datos.sort(key=lambda registro:registro["fecha"])
     for ele in lista_datos:
         ele["fecha"] = ele["fecha"].ctime()
     
-    return HttpResponse(json.dumps(lista_datos[-numCampos*100:]), content_type="application/json")
+    return HttpResponse( json.dumps(lista_datos), content_type="application/json" )
     
 
 def obtenerUltimasLecturas(request, dispositivo):
