@@ -142,14 +142,17 @@ def obtenerDatos(request, dispositivo):
     dashboard_sensor.dispositivo_id='''+str(dispositivo))[0].numCampos
     lista_raw = Valor.objects.raw(
     '''
-    SELECT  dashboard_valor.id, valor, fecha_hora_lectura, campo_id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo)AS 'nombre_val'
-    from dashboard_valor, dashboard_campo, dashboard_sensor
-    WHERE dashboard_valor.campo_id = dashboard_campo.id AND dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+str(dispositivo)+'''  
-    ORDER BY fecha_hora_lectura DESC LIMIT '''+str(num_campos*100)+''' ;
+    SELECT t2.id, valor, fecha_hora_lectura, campo_id,  nombre_val  
+    FROM 
+    (SELECT dashboard_campo.id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo) AS 'nombre_val' 
+        FROM dashboard_campo INNER JOIN dashboard_sensor 
+        ON (dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+ str(dispositivo) +''')) AS t1 
+    INNER JOIN (SELECT * FROM dashboard_valor ORDER BY id  DESC LIMIT 4000) AS t2 
+    ON (t1.id=t2.campo_id) ORDER BY fecha_hora_lectura DESC LIMIT '''+ str( num_campos*100 ) +''';
     '''
     )
 
-    lista_datos = [ ele for ele in lista_raw if not math.isnan(float(ele.valor))]
+    lista_datos = [ {"fecha": ele.fecha_hora_lectura, ele.nombre_val:ele.valor} for ele in lista_raw if not math.isnan(float(ele.valor))]
 
     lista_datos.sort(key=lambda registro:registro["fecha"])
     for ele in lista_datos:
@@ -166,11 +169,14 @@ def obtenerUltimasLecturas(request, dispositivo):
     dashboard_sensor.dispositivo_id='''+str(dispositivo))[0].numCampos
     lista_raw = Valor.objects.raw(
     '''
-    SELECT  dashboard_valor.id, valor, fecha_hora_lectura, campo_id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo)AS 'nombre_val'
-    from dashboard_valor, dashboard_campo, dashboard_sensor
-    WHERE dashboard_valor.campo_id = dashboard_campo.id AND dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+str(dispositivo)+'''  
-    AND fecha_hora_lectura > DATE_SUB( CURRENT_TIMESTAMP(), INTERVAL 1 SECOND) 
-    ORDER BY fecha_hora_lectura ASC LIMIT '''+str(num_campos)+''' ;
+    SELECT t2.id, valor, fecha_hora_lectura, campo_id,  nombre_val  
+    FROM 
+    (SELECT dashboard_campo.id,  CONCAT(CONCAT(dashboard_sensor.nombre_de_sensor,'_'),dashboard_campo.nombre_de_campo) AS 'nombre_val' 
+        FROM dashboard_campo INNER JOIN dashboard_sensor 
+        ON (dashboard_campo.sensor_id=dashboard_sensor.id AND dashboard_sensor.dispositivo_id='''+ str(dispositivo) +''')) AS t1 
+    INNER JOIN (SELECT * FROM dashboard_valor ORDER BY id  DESC LIMIT 4000) AS t2 
+    ON (t1.id=t2.campo_id) WHERE fecha_hora_lectura > DATE_SUB( CURRENT_TIMESTAMP(), INTERVAL 1 SECOND) 
+    ORDER BY fecha_hora_lectura DESC LIMIT '''+ str( num_campos ) +''';
     '''
     )
     
