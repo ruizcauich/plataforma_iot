@@ -50,6 +50,7 @@ class Valor(models.Model):
     valor = models.CharField(max_length=100)
     fecha_hora_lectura = models.DateTimeField(auto_now_add=True)
     fecha_dispositivo = models.DateTimeField(blank=True, null=True)
+    id_paquete = models.IntegerField(default=0)
     campo = models.ForeignKey(Campo, default = 1)
 
     def __str__(self):

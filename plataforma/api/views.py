@@ -17,6 +17,9 @@ def guardar_json(request):
     {
         "proyecto": "13A2004090C47D",
         "dispositivo": "13A20040B7D71A",
+        "fecha": "22/6/2018",
+        "hora": "16:48:8",
+        "id_paquete": 1,
         "sensores":[{
             "nombre":"sensor1", 
             "datos":{
@@ -50,12 +53,15 @@ def guardar_json(request):
     hr = json_recibido["hora"].split(":")
     hr = [int(val) for val in hr]
     date_time = datetime(day = dt[0], month=dt[1], year=dt[2], hour=hr[0], minute=hr[1], second=hr[2])
+    id_paquete = json_recibido["id_paquete"]
+    print(json_recibido)
     #En caso de que sensores no existan o ocurra una excepcion al insertar en la base de datos
     try:
         sensores = json_recibido["sensores"]
         
 
         for sensor in sensores:
+            print(sensor)
             objeto_sensor = dispositivo.sensor_set.get(nombre_de_sensor = sensor["nombre"])
             datos = sensor["datos"]
             registrado += "SENSOR: " + sensor["nombre"] +"["
@@ -66,6 +72,7 @@ def guardar_json(request):
                 # Creamos un nuevo Valor_De_Campo perteneciente al conjunto de este
                 valor = campo.valor_set.create(valor = str(v))
                 valor.fecha_dispositivo=date_time
+                valor.id_paquete = id_paquete
                 valor.save()
                 registrado += "Campo: " + k + ",  "
 
