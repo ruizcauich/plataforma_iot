@@ -1,49 +1,73 @@
-var ejesDeGrafica = [];
+// Ejes Y de la gráfica
+var ejesY = [
+    {   "id":"temp",
+        "axisColor": "#996633",
+        "axisThickness": 2,
+        "axisAlpha": 1,
+        "position": "left",
+        "offset": 0,
+        "title":"° C"
+    }, {
+        "id":"hum",
+        "axisColor": "#999966",
+        "axisThickness": 2,
+        "axisAlpha": 1,
+        "position": "right",
+        "offset": 40,
+        "title":"Humedad"
+    }, {
+        "id":"default",
+        "axisColor": "#000000",
+        "axisThickness": 2,
+        "axisAlpha": 1,
+        "position": "left",
+        "offset": 0,
+    }];
 var  confi_de_graficos = [];
-var chart;
+var chart // El objeto chart de AmCharts;
 
-function generarInfoParaGrafica(ejes){
+function generarInfoParaGrafica(etiquetas){
     // naranja, azul, rojo, verde, morado, 
     var colors = ["#ff681f","#02a4d3","#d92121", "#3aa655", "#639"];
     var offset = 0;
     var aumentoOffset = 50;
-    for(var item=0;item < ejes.length; item++){
-    confi_de_graficos.push({
-        "valueAxis": "v"+item,
-        "lineColor": colors[item],
-        "bullet": "round",
-        "bulletBorderThickness": 10,
-        //"hideBulletsCount": 30,
-        "title": ejes[item],
-        "valueField": ejes[item],
-        "fillAlphas": 0.0,
-        "balloonText": "[[category]]: <b>[[value]]</b>",
-    });
-
-    ejesDeGrafica.push({
-            "id":"v"+item,
-            "axisColor": colors[item],
-            "axisThickness": 2,
-            "axisAlpha": 1,
-            "position": "left",
-            "offset": offset+=aumentoOffset,
-    });
-}
-
-
+    for(var item=0;item < etiquetas.length; item++){
+        var valueAxisIdentifier = "default"; // Default id para el Axis (eje Y)
+        // Determina si corresponde al eje de temperatura o humedad
+        if(etiquetas[item].toLowerCase().includes("temp")){
+            valueAxisIdentifier = "temp"
+        }
+        if( etiquetas[item].toLowerCase().includes("hum") ){
+            valueAxisIdentifier = "hum"
+        }
+        // Catrgoriza las etiquetas y asigna el respectivo eje
+        confi_de_graficos.push({
+            "valueAxis": valueAxisIdentifier,
+            "lineColor": colors[item],
+            "bullet": "round",
+            "bulletBorderThickness": 10,
+            "title": etiquetas[item],
+            "valueField": etiquetas[item], // campo correspondiente para tomar el valor
+            "fillAlphas": 0.0,
+            "balloonText": "[[category]]: <b>[[value]]</b>",
+        });
+    }
 }
 
 function graficar( data ){
-    var ejes = [];
+    var etiquetas = [];
+   
     for(d of data){
+         // Para convertir a objeto fecha 
         d.fecha = new Date(d.fecha);
         for( atributo in d ){
-            if(!ejes.includes(atributo) && atributo!='fecha'){
-                ejes.push(atributo);
+            // Jenera un arreglo de etiquetas
+            if(!etiquetas.includes(atributo) && atributo!='fecha'){
+                etiquetas.push(atributo);
             }
         }
     }
-    generarInfoParaGrafica(ejes);
+    generarInfoParaGrafica(etiquetas);
     chart = AmCharts.makeChart( "chart", {
         "type": "serial",
         "theme": "light",
@@ -51,18 +75,17 @@ function graficar( data ){
             "useGraphSettings": true
         },
         "marginRight":80,
-        "dataProvider":data,
+        "dataProvider":data,// Todos los datos en JSon
         "synchronizeGrid":true,
         "dataDateFormat": "YYYY-MM-DD HH:NN:SS",
         "gridAboveGraphs": true,
-        //"startDuration": 1,
-        "valueAxes": //ejesDeGrafica,
-        [ {
+        "valueAxes": ejesY, // Los tres ejes Y
+       /* [ {
             "gridColor": "#FFFFFF",
             "gridAlpha": 0.2,
             "dashLength": 0
-        } ],
-        "graphs":confi_de_graficos,
+        } ],*/
+        "graphs":confi_de_graficos, // Clasifica los datos y etiquetas
         "chartCursor": {
             "categoryBalloonEnabled": false,
             "cursorAlpha": 0,
@@ -163,8 +186,5 @@ setInterval( function() {
 
     realTimeRequest.open("GET", urlRT, true);
     realTimeRequest.send();
-    
-
-
     
   }, 1000 );
