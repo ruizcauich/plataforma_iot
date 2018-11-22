@@ -48,11 +48,14 @@ def guardar_json(request):
         return HttpResponse('dispositivo no encontrado')
     
     registrado = ''
-    dt = json_recibido["fecha"].split("/")
-    dt = [int(val) for val in dt]
-    hr = json_recibido["hora"].split(":")
-    hr = [int(val) for val in hr]
-    date_time = datetime(day = dt[0], month=dt[1], year=dt[2], hour=hr[0], minute=hr[1], second=hr[2])
+    try:
+        dt = json_recibido["fecha"].split("/")
+        dt = [int(val) for val in dt]
+        hr = json_recibido["hora"].split(":")
+        hr = [int(val) for val in hr]
+        date_time = datetime(day = dt[0], month=dt[1], year=dt[2], hour=hr[0], minute=hr[1], second=hr[2])
+    except:
+        date_time = datetime(day = 1, month=1, year=2018, hour=0, minute=0, second=0)
     id_paquete = json_recibido["id_paquete"]
     print(json_recibido)
     #En caso de que sensores no existan o ocurra una excepcion al insertar en la base de datos
