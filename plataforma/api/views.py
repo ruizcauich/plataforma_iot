@@ -47,7 +47,8 @@ def guardar_json(request):
     except:
         return HttpResponse('dispositivo no encontrado')
     
-    registrado = ''
+    registrado = 'Registrados: '
+    no_encontrados = 'Sensores no encontrados: '
     try:
         dt = json_recibido["fecha"].split("/")
         dt = [int(val) for val in dt]
@@ -65,9 +66,13 @@ def guardar_json(request):
 
         for sensor in sensores:
             print(sensor)
-            objeto_sensor = dispositivo.sensor_set.get(nombre_de_sensor = sensor["nombre"])
+            try:
+                objeto_sensor = dispositivo.sensor_set.get(nombre_de_sensor = sensor["nombre"])
+            except:
+                no_encontrados += sensor["nombre"] +", "
+                continue
             datos = sensor["datos"]
-            registrado += "SENSOR: " + sensor["nombre"] +"["
+            registrado += "SENSOR-> " + sensor["nombre"] +"["
             
             for k,v in datos.items():
                 #Se trae el campo a insertar
@@ -82,9 +87,9 @@ def guardar_json(request):
             registrado += "]"
     
     except:
-        return HttpResponse("No se encuentra algun sensor especificado o algun campo-valor.<br> Registro de transacion: " + registrado)
+        return HttpResponse("Pudo harber ocurrido un error. Registro de transacion: " + no_encontrados + registrado)
     
-    return HttpResponse("Se han registrado los datos.<br> Registro de transaccion: " + registrado)
+    return HttpResponse("Registro de transaccion: "+ no_encontrados + registrado)
 
 
 def validar_datos(proyecto,dispositivo,sensor):
