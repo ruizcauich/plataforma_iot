@@ -1,10 +1,17 @@
+#Importación del paquete forms
 from django import forms
+#Importación de modelos
 from .models import Proyecto, Dispositivo, Sensor, Campo, Valor
 
+#Declaración de la clase FormProyecto. Hereda de la Clase ModelForm 
 class FormProyecto(forms.ModelForm):
+    #Dentro de la clase Meta se especifica información que usa la clase
     class Meta:
+        #Modelo usado
         model = Proyecto
+        #Campos requeridos para el formulario
         fields = ['nombre_de_proyecto','descripcion' ]
+        #Etiquetas para cada campo del modelo Proyecto
         labels = {
             'nombre_de_proyecto': 'Nombre del Proyecto',
             'descripcion': 'Descripción',

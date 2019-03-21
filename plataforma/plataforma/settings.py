@@ -108,18 +108,15 @@ WSGI_APPLICATION = 'plataforma.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+#Variable con información de conexión a una base de datos.
 DATABASES = {
-    #'default': {
-     #   'ENGINE': 'django.db.backends.sqlite3',
-      #  'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sustema_iot',  #os.path.join(BASE_DIR, ''),
-        'PASSWORD': 'raspberry',
-        'USER': 'sistemaiot',
-        'HOST': 'sistema-iot.cmwulxwlbcdj.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql', #Nombre del engine
+        'NAME': 'sustema_iot',  #Nombre de la base de datos
+        'PASSWORD': 'raspberry', #Contrasena de la base de datos
+        'USER': 'sistemaiot', #Usuario de la base de datos
+        'HOST': 'sistema-iot.cmwulxwlbcdj.us-east-1.rds.amazonaws.com', #Host
+        'PORT': '3306', #Puerto donde se conecta la base de datos
     }
 }
 
