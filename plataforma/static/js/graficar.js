@@ -53,7 +53,7 @@ function generarInfoParaGrafica(etiquetas){
         });
     }
 }
-
+// Función que toma los datos y configura la graficación
 function graficar( data ){
     var etiquetas = [];
    
@@ -61,13 +61,15 @@ function graficar( data ){
          // Para convertir a objeto fecha 
         d.fecha = new Date(d.fecha);
         for( atributo in d ){
-            // Jenera un arreglo de etiquetas
+            // Genera un arreglo de etiquetas
             if(!etiquetas.includes(atributo) && atributo!='fecha'){
                 etiquetas.push(atributo);
             }
         }
     }
+    // Ejecuta la función que categoriza los datos para graficar
     generarInfoParaGrafica(etiquetas);
+    // Crea un objeto de AmCharts y configura la gráfica
     chart = AmCharts.makeChart( "chart", {
         "type": "serial",
         "theme": "light",
@@ -111,16 +113,20 @@ function graficar( data ){
         },
         
 
-        } );
+    } );
 }
-
+// Para almacenar las lecturas
 var dat;
+// Objeto empleado para crear la petición
 var aj = new XMLHttpRequest();
 aj.onreadystatechange = function(){
+    // Hay una respuesta sin errores
     if(this.readyState == 4 && this.status==200){
         console.log(this.responseText);
+        // Se convierte de texto a estructura de datos para JavaScript
         dat = JSON.parse(this.responseText);
         console.log(dat);
+        // Si no hay lecturas, se despliega un aviso
         if(dat.length==0){
             var avisoModal = new LIBRERIA.Modal("Aviso");
             avisoModal.informacion();
@@ -130,10 +136,11 @@ aj.onreadystatechange = function(){
             avisoModal.abrir();
             setTimeout(function(){ avisoModal.cerrar()}, 3500);
         }
+        // Se envian los tados para graficar
         graficar( dat );
     }
 }
-
+// Se ejecuta la petición
 aj.open("GET", url, true);
 aj.send();
 
@@ -154,8 +161,9 @@ function mostrarNumeroRegistros(){
     otravez(numeroRegistros);
 
 }
-
+// Se crea una función que realice una petición HTTP cada segundo
 setInterval( function() {
+    // Objeto empleado para crear la petición
     var realTimeRequest = new XMLHttpRequest();
     // normally you would load new datapoints here,
     // but we will just generate some random values
@@ -167,23 +175,28 @@ setInterval( function() {
   
     // add new one at the end
     realTimeRequest.onreadystatechange = function(){
+        // Hay una respuesta sin errores
         if(this.readyState == 4 && this.status==200 && chart!=null){
             console.log(this.responseText);
             var rtDat
+            // Se convierte de texto a estructura de datos para JavaScript
             rtDat = JSON.parse(this.responseText);
             
             for( valores of rtDat ){
+                // Para cada lectura se crea una fecha
                 valores.fecha = new Date(valores.fecha)
                 console.log(valores.fecha)
+                // Se anexa la nueva lectura a la gráfica
                chart.dataProvider.push( valores);
                chart.dataProvider.shift();
             }
+            // se validan los datos para graficarlos
             chart.validateData();
             
             
         }
     }
-
+    // Se ejecuta la petición (cada segundo)
     realTimeRequest.open("GET", urlRT, true);
     realTimeRequest.send();
     
